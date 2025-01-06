@@ -1,0 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    useful_links.txt                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/06 16:14:47 by jqueijo-          #+#    #+#              #
+#    Updated: 2025/01/06 16:16:56 by jqueijo-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+ex01:
+
+https://elearning.intra.42.fr/notions/piscine-c-d00-c-basics/subnotions
+https://cplusplus.com/reference/string/string/
+https://cplusplus.com/reference/iomanip/

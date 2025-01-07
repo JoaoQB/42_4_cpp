@@ -6,30 +6,46 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/01/06 16:36:57 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/01/07 14:32:42 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = my_phonebook
+NAME = phonebook
 
-SRC = ./srcs/my_phonebook.cpp
+SRC_DIR = ./srcs
+OBJ_DIR = ./objs
 
-OBJ = $(SRC:%.cpp=%.o)
+SRCS = $(SRC_DIR)/main.cpp \
+	$(SRC_DIR)/Contact.cpp \
+	$(SRC_DIR)/Phonebook.cpp
+
+OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
+DEPS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.d)))
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+OBJ_CFLAGS = $(CFLAGS) -MMD
+RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CC) $(OBJ_CFLAGS) -c $< -o $@
+
+-include $(DEPS)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJ)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re

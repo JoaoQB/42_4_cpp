@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:02:11 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/07 11:53:44 by jqueijo-         ###   ########.fr       */
+/*   Created: 2025/01/07 12:22:00 by jqueijo-          #+#    #+#             */
+/*   Updated: 2025/01/07 15:21:12 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/Contact.hpp"
+#include "../includes/Phonebook.hpp"
 #include <iostream>
-#include <cstring>
 
-int	main(int argc, char **argv) {
-	std::string	str;
+Contact::Contact() {
+	std::cout << "Contact constructed" << std::endl;
+	return;
+}
 
-	if (argc == 1) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-	} else {
-		for (int i = 1; i < argc; i++) {
-			str = argv[i];
-			for (int i = 0; str[i]; i++) {
-				str[i] = std::toupper(str[i]);
-			}
-			std::cout << str;
-		}
-		std::cout << std::endl;
-	}
+Contact::~Contact() {
+	std::cout << "Contact destroyed" << std::endl;
+	return;
 }

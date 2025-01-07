@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 16:02:11 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/07 11:53:44 by jqueijo-         ###   ########.fr       */
+/*   Created: 2025/01/07 12:15:17 by jqueijo-          #+#    #+#             */
+/*   Updated: 2025/01/07 15:33:39 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cstring>
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
-int	main(int argc, char **argv) {
-	std::string	str;
+#include <string>
 
-	if (argc == 1) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-	} else {
-		for (int i = 1; i < argc; i++) {
-			str = argv[i];
-			for (int i = 0; str[i]; i++) {
-				str[i] = std::toupper(str[i]);
-			}
-			std::cout << str;
-		}
-		std::cout << std::endl;
-	}
-}
+class Contact {
+	public:
+		Contact();
+		~Contact();
+	private:
+		std::string	name;
+		std::string	firstName;
+		std::string	lastName;
+		std::string	nickname;
+		int			phoneNumber;
+		std::string	darkestSecret;
+};
+
+#endif

@@ -1,2 +1,6 @@
 *.o
+*.d
+objs/
+deps/
 megaphone
+phonebook

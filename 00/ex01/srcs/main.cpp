@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:37:08 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/07 15:40:30 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:18:58 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int	main(void) {
 	Phonebook	myPhonebook;
 	std::string	input;
-
 	while (true) {
 		input = myPhonebook.phonebookInit();
 		if (!input.compare("ADD")) {

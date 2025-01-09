@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:22:13 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/08 13:41:39 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:39:30 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	Phonebook::searchContact() {
 		return ;
 	}
 	std::cout << "\n** Saved Contacs **\n" << std::endl;
-	std::cout << "   Index  |First Name|Last Name| Nickname " << std::endl;
+	std::cout << "   Index  |First Name| Last Name| Nickname " << std::endl;
 	for (int i = 0; i < savedContacts; i++) {
 		this->contacts[i].displayContacts();
 	}
@@ -79,13 +79,13 @@ std::string	Phonebook::phonebookInit() {
 }
 
 Phonebook::Phonebook() {
-	std::cout << "Phonebook constructed" << std::endl;
+	// std::cout << "Phonebook constructed" << std::endl;
 	this->savedContacts = 0;
 	this->currentIndex = 0;
 	return;
 }
 
 Phonebook::~Phonebook() {
-	std::cout << "Phonebook destroyed" << std::endl;
+	// std::cout << "Phonebook destroyed" << std::endl;
 	return;
 }

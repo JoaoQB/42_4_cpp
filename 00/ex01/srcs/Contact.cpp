@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:22:00 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/08 13:42:52 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:39:47 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	Contact::setContact(int	index) {
 }
 
 Contact::~Contact() {
-	std::cout << "Contact destroyed" << std::endl;
+	// std::cout << "Contact destroyed" << std::endl;
 	return;
 }
 
 Contact::Contact() {
-	std::cout << "Contact constructed" << std::endl;
+	// std::cout << "Contact constructed" << std::endl;
 	this->index = -1;
 	return;
 }

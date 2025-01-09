@@ -6,7 +6,7 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/01/06 16:02:23 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/01/09 16:16:57 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ SRC = ./srcs/megaphone.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CCXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CCXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

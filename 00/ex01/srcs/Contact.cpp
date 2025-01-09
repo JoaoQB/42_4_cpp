@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:22:00 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/09 11:39:47 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:50:00 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,51 @@ void	Contact::displayContacts() {
 	std::cout << std::endl;
 }
 
+int	Contact::isValidPhoneNumber(std::string field) {
+	for (int i = 0; field[i]; i++) {
+		if (!isdigit(field[i])) {
+			std::cout << "Please use only numeric characters" << std::endl;
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	Contact::isValidField(std::string field) {
+	for (int i = 0; field[i]; i++) {
+		if (!isalnum(field[i])) {
+			std::cout << "Please use only alphanumeric characters" << std::endl;
+			return (0);
+		}
+	}
+	return (1);
+}
+
+std::string	Contact::getNumber(std::string field) {
+	std::string	new_field;
+
+	std::cout << "Please input:" << std::endl;
+	std::cout << field << ": ";
+	std::getline(std::cin, new_field);
+	if (std::cin.eof()) {
+		std::cout << std::endl;
+		return (new_field);
+	} else if (new_field.length() == 0 || !isValidPhoneNumber(new_field)) {
+		return (Contact::getNumber(field));
+	}
+	return (new_field);
+}
+
 std::string	Contact::getField(std::string field) {
 	std::string	new_field;
 
 	std::cout << "Please input:" << std::endl;
 	std::cout << field << ": ";
 	std::getline(std::cin, new_field);
-	if (new_field.length() == 0) {
+	if (std::cin.eof()) {
+		std::cout << std::endl;
+		return (new_field);
+	} else if (new_field.length() == 0 || !isValidField(new_field)) {
 		return (Contact::getField(field));
 	}
 	return (new_field);
@@ -69,7 +107,7 @@ void	Contact::setContact(int	index) {
 	this->firstName = getField("First Name");
 	this->lastName = getField("Last Name");
 	this->nickname = getField("Nickname");
-	this->phoneNumber = getField("Phone Number");
+	this->phoneNumber = getNumber("Phone Number");
 	this->darkestSecret = getField("Darkest Secret");
 }
 

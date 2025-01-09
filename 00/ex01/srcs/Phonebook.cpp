@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:22:13 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/09 11:39:30 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:22:37 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+
+// nao aceitar caracteres nao alfanumerico
+// nao aumentar index quando nao e aceite
+// nao aceitar letras no phonenumber
 
 int	Phonebook::isValidContact(std::string input) {
 	std::stringstream	ss;

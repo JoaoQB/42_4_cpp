@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:37:08 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/08 10:18:58 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:17:17 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	main(void) {
 	std::string	input;
 	while (true) {
 		input = myPhonebook.phonebookInit();
+		if (std::cin.eof()) {
+			std::cout << std::endl;
+			return (1);
+		}
 		if (!input.compare("ADD")) {
 			myPhonebook.addContact();
 		} else if (!input.compare("SEARCH")) {
@@ -29,6 +33,5 @@ int	main(void) {
 			std::cout << "Option not valid" << std::endl;
 		}
 	}
-
 	return (0);
 }

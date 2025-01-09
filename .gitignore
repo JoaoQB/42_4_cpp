@@ -4,3 +4,4 @@ objs/
 deps/
 megaphone
 phonebook
+.vscode/

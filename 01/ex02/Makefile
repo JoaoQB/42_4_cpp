@@ -5,44 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/01/10 20:03:22 by jqueijo-         ###   ########.fr        #
+#    Created: 2025/01/11 11:42:41 by jqueijo-          #+#    #+#              #
+#    Updated: 2025/01/11 11:53:37 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brainz
+NAME = hiBrain
 
-SRC_DIR = ./srcs
-OBJ_DIR = ./objs
+SRC = ./main.cpp
 
-SRCS = $(SRC_DIR)/main.cpp \
-	$(SRC_DIR)/Zombie.cpp \
-	$(SRC_DIR)/newZombie.cpp \
-	$(SRC_DIR)/randomChump.cpp
+OBJ = $(SRC:%.cpp=%.o)
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
-DEPS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.d)))
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-OBJ_CFLAGS = $(CFLAGS) -MMD
+CCXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CC) $(OBJ_CFLAGS) -c $< -o $@
-
--include $(DEPS)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+$(NAME): $(OBJ)
+	$(CCXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
@@ -50,3 +34,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+

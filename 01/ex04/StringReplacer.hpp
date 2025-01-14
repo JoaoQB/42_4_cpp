@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:12:18 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/13 14:45:38 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:31:14 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <sys/stat.h>
 
 class StringReplacer {
 	private:
@@ -22,8 +25,9 @@ class StringReplacer {
 		const std::string	s1;
 		const std::string	s2;
 
-		int	parseArgs();
-		int	filenameExists();
+		int		validateArgs();
+		void	copyAndReplaceStringToFile(const std::string& string,
+											const std::string& outfileName);
 	public:
 		StringReplacer(const std::string& filename, const std::string& s1, const std::string& s2);
 		~StringReplacer();

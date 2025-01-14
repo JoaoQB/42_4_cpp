@@ -10,3 +10,5 @@ zombieHorde
 hiBrain
 stringReplacer
 tests/
+test.txt
+*.replace

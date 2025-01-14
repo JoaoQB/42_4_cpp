@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:32:13 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/14 17:37:45 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:43:06 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ StringReplacer::StringReplacer(const std::string& filename,
 								const std::string& s1,
 								const std::string& s2)
 	: filename(filename), s1(s1), s2(s2) {
-	std::cout << "StringReplacer constructed" << std::endl;
+	// std::cout << "StringReplacer constructed" << std::endl;
 }
 
 StringReplacer::~StringReplacer() {
-	std::cout << "StringReplacer destroyed" << std::endl;
+	// std::cout << "StringReplacer destroyed" << std::endl;
 }
 
 int	StringReplacer::validateArgs() {
@@ -69,6 +69,7 @@ void	StringReplacer::copyAndReplaceStringToFile(const std::string& string,
 		pos = newString.find(this->s1, pos);
 	}
 	outfile << newString;
+	outfile.close();
 }
 
 void	StringReplacer::replaceToFile() {
@@ -88,4 +89,5 @@ void	StringReplacer::replaceToFile() {
 	}
 	std::string outfileName = filename + ".replace";
 	copyAndReplaceStringToFile(content, outfileName);
+	file.close();
 }

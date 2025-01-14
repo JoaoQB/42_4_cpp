@@ -6,14 +6,14 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:44:50 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:47:11 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:53:36 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
 Harl::Harl() {
-	std::cout << "Harl constructed" << std::endl;
+	// std::cout << "Harl constructed" << std::endl;
 	funcArray[0] = &Harl::debug;
 	funcArray[1] = &Harl::info;
 	funcArray[2] = &Harl::warning;
@@ -25,7 +25,7 @@ Harl::Harl() {
 }
 
 Harl::~Harl() {
-	std::cout << "Harl destroyed" << std::endl;
+	// std::cout << "Harl destroyed" << std::endl;
 }
 
 void	Harl::complain(std::string level) {

@@ -6,16 +6,17 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/01/14 20:52:15 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/01/16 13:53:40 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = harl
+NAME = harlFilter
 
 SRC_DIR = .
 OBJ_DIR = ./objs
 
 SRCS = $(SRC_DIR)/main.cpp \
+	$(SRC_DIR)/Harl.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 DEPS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.d)))

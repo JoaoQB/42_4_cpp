@@ -6,17 +6,18 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/01/20 16:32:32 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/01/21 16:52:56 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixed
+NAME = fixedFloat
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./objs
 
 SRCS = $(SRC_DIR)/main.cpp \
-	$(SRC_DIR)/Fixed.cpp
+	$(SRC_DIR)/Fixed.cpp \
+	$(SRC_DIR)/PrintBinary.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 DEPS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.d)))

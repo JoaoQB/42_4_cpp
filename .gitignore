@@ -14,4 +14,5 @@ test.txt
 *.replace
 harl
 harlFilter
-fixed00
+fixed
+fixedFloat

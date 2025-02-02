@@ -6,11 +6,11 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 13:42:01 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/02/01 20:05:07 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/02/02 19:15:27 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = clapTrap
+NAME = scavTrap
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./objs

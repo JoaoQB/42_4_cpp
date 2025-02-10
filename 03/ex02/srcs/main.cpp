@@ -6,51 +6,42 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:50:10 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/10 14:30:58 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:08:48 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 #include "../includes/ScavTrap.hpp"
+#include "../includes/FragTrap.hpp"
 
 int main() {
-	// Create a ClapTrap object
-	ClapTrap claptrap("CLTP");
-	claptrap.attack("target1");
-	claptrap.takeDamage(5);
-	claptrap.beRepaired(3);
+    std::cout << "=== Creating ClapTrap ===" << std::endl;
+    ClapTrap clap("CLAPPY");
 
-	std::cout << std::endl; // Separate outputs for clarity
+    std::cout << "\n=== Creating ScavTrap ===" << std::endl;
+    ScavTrap scav("SCAVVY");
 
-	// Create a ScavTrap object
-	ScavTrap scavtrap("SCVT");
-	scavtrap.attack("target2");
-	scavtrap.takeDamage(20);
-	scavtrap.beRepaired(10);
-	scavtrap.guardGate();
+    std::cout << "\n=== Creating FragTrap ===" << std::endl;
+    FragTrap frag("FRAGGY");
 
-	std::cout << std::endl; // Separate outputs for clarity
+    std::cout << "\n=== ClapTrap Actions ===" << std::endl;
+    clap.attack("a bandit");
+    clap.takeDamage(5);
+    clap.beRepaired(3);
 
-	// Create a ScavTrap from an existing one
-	ScavTrap scavtrap2(scavtrap);
-	scavtrap2.attack("target3");
+    std::cout << "\n=== ScavTrap Actions ===" << std::endl;
+    scav.attack("a psycho");
+    scav.guardGate();
+    scav.takeDamage(40);
+    scav.beRepaired(20);
 
-	std::cout << std::endl; // Separate outputs for clarity
+    std::cout << "\n=== FragTrap Actions ===" << std::endl;
+    frag.attack("a skag");
+    frag.highFivesGuys();
+    frag.takeDamage(50);
+    frag.beRepaired(25);
 
-	// Assignment operator test
-	ScavTrap scavtrap3("SCVT3");
-	scavtrap3 = scavtrap;
-	scavtrap3.attack("target4");
+    std::cout << "\n=== Destruction Begins ===" << std::endl;
 
-	std::cout << std::endl; // Separate outputs for clarity
-
-	// Test ClapTrap with low energy and hit points
-	ClapTrap lowEnergyTrap("LOW_ENERGY");
-	lowEnergyTrap.takeDamage(10);  // Should trigger dramatic death
-	lowEnergyTrap.beRepaired(5);    // Should indicate no energy for repair
-
-	lowEnergyTrap = scavtrap2;
-	lowEnergyTrap.takeDamage(100);
-
-	return (0);
+    return 0;
 }

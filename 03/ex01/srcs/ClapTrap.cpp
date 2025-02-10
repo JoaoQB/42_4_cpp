@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:57:51 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/01 20:02:12 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:46:58 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ ClapTrap::~ClapTrap() {
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
-	std::cout << "Assignment Operator Called" << std::endl;
+	std::cout << "Equal Assignment Operator Called" << std::endl;
 	std::cout << this->name << " = " << other.name << std::endl;
 	if (this != &other) {
 		this->name = other.name;

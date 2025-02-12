@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 19:13:25 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/12 14:57:52 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:14:26 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 }
 
 void	ScavTrap::attack(const std::string& target) {
+	if (this->hitPoints <= 0) {
+		std::cout << this->name << ": \"Uh-oh! ScavTrap is dead!";
+		std::cout << " How am I supposed to be an unstoppable killing machine?!\"";
+		std::cout << std::endl;
+		return ;
+	}
 	if (this->energyPoints == 0) {
 		std::cout << this->name << ": \"Uh-oh! No energy?! ";
 		std::cout << "That’s... bad, right? Do I punch now?\"" << std::endl;

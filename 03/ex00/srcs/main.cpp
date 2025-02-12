@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:50:10 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/01 19:59:39 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:29:56 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main(void) {
 
 	std::cout << "\n--- Testing Copy Constructor ---\n";
 	ClapTrap clap3(clap1); // Copy constructor
+	clap1 = clap3;
 
 	std::cout << "\n--- Testing Assignment Operator ---\n";
 	ClapTrap clap4("TEMP-TP");
@@ -40,6 +41,9 @@ int main(void) {
 
 	clap2.attack("CL4P-TP");
 	clap1.takeDamage(6);
+	clap3.takeDamage(20);
+	clap3.attack("target");
+	clap3.beRepaired(20);
 	clap3.takeDamage(20);
 
 	std::cout << "\n--- Running out of energy! ---\n";

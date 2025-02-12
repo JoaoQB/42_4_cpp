@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:57:51 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/10 13:46:58 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:35:34 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ ClapTrap::ClapTrap(std::string const &name) : name(name),
 	std::cout << this->name << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) {
+ClapTrap::ClapTrap(const ClapTrap &other) : name(other.name),
+	hitPoints(other.hitPoints),
+	energyPoints(other.energyPoints),
+	attackDamage(other.attackDamage) {
 	std::cout << "ClapTrap Copy Constructor called for: ";
 	std::cout << other.name << std::endl;
-	*this = other;
 }
 
 ClapTrap::~ClapTrap() {
@@ -32,7 +34,7 @@ ClapTrap::~ClapTrap() {
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
-	std::cout << "Equal Assignment Operator Called" << std::endl;
+	std::cout << "ClapTrap Equal Assignment Operator Called" << std::endl;
 	std::cout << this->name << " = " << other.name << std::endl;
 	if (this != &other) {
 		this->name = other.name;
@@ -44,6 +46,12 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 }
 
 void	ClapTrap::attack(const std::string& target) {
+	if (this->hitPoints <= 0) {
+		std::cout << this->name << ": \"Uh-oh! ClapTrap is dead!";
+		std::cout << " How am I supposed to be an unstoppable killing machine?!\"";
+		std::cout << std::endl;
+		return ;
+	}
 	if (this->energyPoints == 0) {
 		std::cout << this->name << ": \"Uh-oh! No juice left!";
 		std::cout << " How am I supposed to be an unstoppable killing machine?!\"";
@@ -58,6 +66,12 @@ void	ClapTrap::attack(const std::string& target) {
 }
 
 void	ClapTrap::takeDamage(unsigned int amount) {
+	if (this->hitPoints <= 0) {
+		std::cout << this->name << ": ";
+		std::cout << "Really? Hurting what's dead already???";
+		std::cout << " I guess robots have no feelings..." << std::endl;
+		return ;
+	}
 	this->hitPoints -= amount;
 	if (this->hitPoints <= 0) {
 		std::cout << this->name << ": \"Oof! That hurt! System failure ";
@@ -71,6 +85,12 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void	ClapTrap::beRepaired(unsigned int amount) {
+	if (this->hitPoints <= 0) {
+		std::cout << this->name << ": \"Uh-oh! ClapTrap is dead!";
+		std::cout << " How can you fix what isn't?!\"";
+		std::cout << std::endl;
+		return ;
+	}
 	if (this->energyPoints == 0) {
 		std::cout << this->name << ": \"I'm out of energy! No duct tape, ";
 		std::cout << "no hope! Someone, please, send help!\"" << std::endl;

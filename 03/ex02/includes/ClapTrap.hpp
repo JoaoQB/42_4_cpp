@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:45:55 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/02 20:04:32 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:06:46 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ class ClapTrap {
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
+
+		void printAttributes() const;
 };
 
 #endif

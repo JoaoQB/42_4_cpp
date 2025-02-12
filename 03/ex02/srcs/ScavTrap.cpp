@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 19:13:25 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/10 14:33:23 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:57:52 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name) {
 	std::cout << this->name << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other.name) {
-	std::cout << "ScavTrap Copy Constructor called for: ";
-	std::cout << other.name << std::endl;
-	*this = other;
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
+	std::cout << "ScavTrap Copy Constructor called. Copy: ";
+	std::cout << other.name << " into: " << this->name << std::endl;
 }
 
 ScavTrap::~ScavTrap() {
@@ -57,6 +56,17 @@ void	ScavTrap::attack(const std::string& target) {
 }
 
 void	ScavTrap::guardGate() {
-	std::cout << "ScavTrap " << this->name << " in Gate Keeper mode! ";
+	if (this->hitPoints <= 0) {
+		std::cout << this->name << ": \"Uh-oh! Me is dead?! ";
+		std::cout << "How am I supposed to guard?\"" << std::endl;
+		return ;
+	}
+	if (this->energyPoints == 0) {
+		std::cout << this->name << ": \"Uh-oh! No energy?! ";
+		std::cout << "I can't guard..\"" << std::endl;
+		return ;
+	}
+	this->energyPoints--;
+	std::cout << "ScavTrap: " << this->name << " in Gate Keeper mode! ";
 	std::cout << "Nothing gets past me! Unless... wait, was I supposed to stop that guy?" << std::endl;
 }

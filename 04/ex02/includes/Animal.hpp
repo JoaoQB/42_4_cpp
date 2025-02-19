@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:56:09 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/18 12:50:13 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:20:37 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 class Animal {
 	protected:
 		std::string type;
-	public:
 		Animal();
 		Animal(const Animal &other);
+	public:
 		virtual ~Animal();
 		Animal& operator=(const Animal &other);
 		std::string getType() const;

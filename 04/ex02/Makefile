@@ -6,11 +6,11 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 10:55:39 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/02/19 14:01:23 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/02/19 15:02:04 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = animalBrain
+NAME = noAnimal
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./objs

@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:19:03 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:11 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:29:20 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,16 @@ void testPolymorphism() {
 
 	Animal* animal1 = new Dog();
 	Animal* animal2 = new Cat();
+	// Animal* animal3 = new Animal(); // Uncomment to check protected constructor
+	// Animal* animal4 = new Animal(*(animal2)); // Uncomment to check protected copy constructor
+
+	// Animal dog = Dog();
+	Dog dog2 = Dog();
+	dog2.makeSound();
 
 	animal1->makeSound();
 	animal2->makeSound();
+	dog2.makeSound();
 
 	delete animal1;
 	delete animal2;
@@ -57,10 +64,10 @@ void testDeepCopy() {
 	Dog originalDog;
 	originalDog.getBrain().set_idea(0, "Fetch the ball");
 
-	Dog copiedDog = Dog(originalDog); // Copy constructor
-	Dog copiedDog2 = originalDog; // Copy constructor
+	Dog copiedDog = Dog(originalDog);
+	Dog copiedDog2 = originalDog;
 	Dog assignedDog;
-	assignedDog = originalDog; // Assignment operator
+	assignedDog = originalDog;
 
 	// Check that ideas are independent
 	std::cout << "Original Dog idea: " << originalDog.getBrain().get_idea(0) << std::endl;

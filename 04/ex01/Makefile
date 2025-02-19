@@ -6,7 +6,7 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 10:55:39 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/02/18 13:48:23 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/02/19 14:01:23 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,6 @@ SRCS = $(SRC_DIR)/main.cpp \
 	$(SRC_DIR)/Animal.cpp \
 	$(SRC_DIR)/Cat.cpp \
 	$(SRC_DIR)/Dog.cpp \
-	$(SRC_DIR)/WrongAnimal.cpp \
-	$(SRC_DIR)/WrongCat.cpp \
 	$(SRC_DIR)/Brain.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))

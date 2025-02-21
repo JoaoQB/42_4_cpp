@@ -6,13 +6,13 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:09:02 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/18 13:14:50 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:14:39 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Animal.hpp"
 
-Animal::Animal() : type("Pholyrphomic Animal") {
+Animal::Animal() : type("Polymorphic Animal") {
 	std::cout << "Animal Constructor: God blessed us with a " << this->type;
 	std::cout << "!" << std::endl;
 }

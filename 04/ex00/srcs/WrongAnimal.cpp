@@ -6,14 +6,14 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:26:11 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/18 13:15:25 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:15:22 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal() : type("Pholyrphomic Wrong Animal") {
+WrongAnimal::WrongAnimal() : type("Polymorphic Wrong Animal") {
 	std::cout << "WrongAnimal Constructor: What is this, a poor " << this->type;
 	std::cout << "?" << std::endl;
 }

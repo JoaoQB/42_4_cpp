@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:56:09 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/02/19 15:20:37 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:14:03 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Animal {
 		virtual ~Animal();
 		Animal& operator=(const Animal &other);
 		std::string getType() const;
-		virtual void makeSound() const;
+		virtual void makeSound() const = 0;
 };
 
 #endif

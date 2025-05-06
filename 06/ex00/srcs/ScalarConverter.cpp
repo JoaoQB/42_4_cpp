@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:09 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:01:25 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/06 23:44:23 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ void ScalarConverter::printErr(const std::string& error) {
 
 std::string ScalarConverter::trimInput(const std::string& input) {
 	if (input.empty()) {
-		printErr("Empty Input");
-		return ("");
+		throw std::invalid_argument("Empty Input");
+	}
+	if (input.size() == 1 && isprint(input[0])) {
+		return input;
 	}
 	const char* whitespace = " \t\v\r\n";
 	std::size_t start = input.find_first_not_of(whitespace);
 	if (start == std::string::npos) {
-		printErr("Invalid Input: only whitespaces");
-		return ("");
+		throw std::invalid_argument("Invalid Input");
 	}
 	std::size_t end = input.find_last_not_of(whitespace);
 	return (input.substr(start, end - start + 1));
@@ -99,22 +100,23 @@ void ScalarConverter::convertChar(const std::string& input) {
 	std::cout << "double: " << d << ".0\n";
 }
 
-void ScalarConverter::convert(const std::string &input) {
-	std::string trimmedInput = trimInput(input);
-	if (trimmedInput.empty()) {
-		return ;
-	}
-	std::cout << trimmedInput << std::endl;
-	if (isPseudoLiteral(trimmedInput)) {
-		// std::cout << trimmedInput << std::endl;
-		printPseudoLiteral(trimmedInput);
-		return ;
-	}
-	switch (findType(input)) {
-		case CHAR: convertChar(input); break;
-		// case INT: convertInt(input); break;
-		// case FLOAT: convertFloat(input); break;
-		// case DOUBLE: convertDouble(input); break;
-		default: printErr("Invalid Input");
+void ScalarConverter::convert(const std::string& input) {
+	try {
+		std::string trimmedInput = trimInput(input);
+
+		if (isPseudoLiteral(trimmedInput)) {
+			printPseudoLiteral(trimmedInput);
+			return;
+		}
+
+		switch (findType(trimmedInput)) {
+			case CHAR: convertChar(trimmedInput); break;
+			// case INT: convertInt(trimmedInput); break;
+			// case FLOAT: convertFloat(trimmedInput); break;
+			// case DOUBLE: convertDouble(trimmedInput); break;
+			default: throw std::invalid_argument("Invalid Input");
+		}
+	} catch (const std::exception& e) {
+		std::cout << "Error: " << e.what() << std::endl;
 	}
 }

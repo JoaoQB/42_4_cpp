@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:00 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:00:43 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/06 23:40:47 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main() {
 		"1.0ff",     // Invalid
 		"42f0",      // Invalid
 		"",          // Empty
+		" ",		 // Single Space
 		"     ",     // Whitespace only
 		"999999999999999999999999", // Overflow
 		"#",         // Non-digit printable char

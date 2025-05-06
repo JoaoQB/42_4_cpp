@@ -1,0 +1,48 @@
+In c++ type conversion can be handled using Implicit/Explicit Type Conversion.
+Explicit Type Conversion, also known as Type Casting, is the conversion of one type of data to another type of data manually by a programmer.
+
+C++ introduced it's own typecasting method using cast operators. There are four types of casting:
+
+1. Static Cast: Used for standard compile time type conversions.
+2. Dynamic Cast: Used for runtime type conversion in polymorphism and inheritance.
+3. Const Cast: Removes or adds const or volatile qualifiers.
+4. Reinterpret Cast: Used for low-level reinterpretation of bits (e.g., converting pointers).
+
+
+1. Static Cast:
+
+	Use case:
+		Typically used for standard compile-time type conversions.
+
+	Can be used for:
+		Converting between primitive types (e.g., double to int).
+		Safe upcasting or downcasting in class hierarchies (provided you're sure of the cast's validity).
+		Converting void* to a specific pointer type or vice versa.
+
+2. Dynamic Cast:
+
+	Use case:
+		Primarily used for type-safe downcasting in polymorphic hierarchies.
+
+	Requirement:
+		The base class must have at least one virtual function (for runtime type information).
+
+	Note: If the cast fails, it returns nullptr for pointers and throws std::bad_cast for references.
+
+3. Const Cast:
+
+	Use case:
+		Removes or adds const or volatile qualifiers.
+
+	Caution:
+		You should never use const_cast to remove const from a truly constant object.
+		It results in undefined behavior if the object was originally declared const.
+
+4. Reinterpret Cast:
+
+	Use case:
+		Used for low-level reinterpretation of memory and data.
+
+	Very dangerous:
+		This cast allows casting unrelated types (like pointers to integers) and should only be used in low-level systems programming.
+		It can break the program's memory model or lead to undefined behavior if used improperly.

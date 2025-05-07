@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:09 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:44:23 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:14:22 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,20 @@ LiteralType ScalarConverter::findType(const std::string& input) {
 	return (INT);
 }
 
+void ScalarConverter::printCharFromInt(int number) {
+	if (number > CHAR_MAX || number < CHAR_MIN) {
+		std::cout << "char: impossible\n";
+		return;
+	}
+	char c = static_cast<char>(number);
+	std::cout << "char: ";
+	if (isprint(c)) {
+		std::cout << "'" << c << "'\n";
+	} else {
+		std::cout << "Non displayable\n";
+	}
+}
+
 void ScalarConverter::convertChar(const std::string& input) {
 	char c = input[0];
 	int i = static_cast<int>(c);
@@ -96,6 +110,27 @@ void ScalarConverter::convertChar(const std::string& input) {
 
 	std::cout << "char: '" << c << "'\n";
 	std::cout << "int: " << i << "\n";
+	std::cout << "float: " << f << ".0f\n";
+	std::cout << "double: " << d << ".0\n";
+}
+
+void ScalarConverter::convertInt(const std::string& input) {
+	std::stringstream ss(input);
+	long result;
+
+	ss >> result;
+	if (ss.fail() || !ss.eof()) {
+		throw std::invalid_argument("Not an INT");
+	}
+	printCharFromInt(result);
+	if (result < INT_MIN || result > INT_MAX) {
+		std::cout << "int: impossible\n";
+	} else {
+		int i = static_cast<int>(result);
+		std::cout << "int: " << i << "\n";
+	}
+	float f = static_cast<float>(result);
+	double d = static_cast<double>(result);
 	std::cout << "float: " << f << ".0f\n";
 	std::cout << "double: " << d << ".0\n";
 }
@@ -111,7 +146,7 @@ void ScalarConverter::convert(const std::string& input) {
 
 		switch (findType(trimmedInput)) {
 			case CHAR: convertChar(trimmedInput); break;
-			// case INT: convertInt(trimmedInput); break;
+			case INT: convertInt(trimmedInput); break;
 			// case FLOAT: convertFloat(trimmedInput); break;
 			// case DOUBLE: convertDouble(trimmedInput); break;
 			default: throw std::invalid_argument("Invalid Input");

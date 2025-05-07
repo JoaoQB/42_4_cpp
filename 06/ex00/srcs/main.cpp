@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:00 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:40:47 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:07:34 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int main() {
 		"0",         // INT
 		"42",        // INT
 		"   123   ", // INT with whitespace
+		"128",         // INT out of char range
+		"127",         // CHAR edge case
 		"-2147483648", // INT min
 		"2147483647",  // INT max
+		"-2147483649", // INT min - 1
+		"2147483648",  // INT max + 1
 		"3.14",      // DOUBLE
 		"2.71828",   // DOUBLE
 		"0.0",       // DOUBLE
@@ -37,7 +41,8 @@ int main() {
 		"",          // Empty
 		" ",		 // Single Space
 		"     ",     // Whitespace only
-		"999999999999999999999999", // Overflow
+		"99999999999999999999999999999999", // Overflow
+		"-99999999999999999999999999999999", // Underflow
 		"#",         // Non-digit printable char
 	};
 

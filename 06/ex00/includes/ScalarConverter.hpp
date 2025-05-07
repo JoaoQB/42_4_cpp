@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:33 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:01:14 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:00:00 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <string>
 # include <iostream>
+# include <sstream>
+# include <climits>
 
 enum LiteralType {
 	CHAR,
@@ -36,14 +38,15 @@ class ScalarConverter {
 		static bool isPseudoLiteral(const std::string& input);
 		static void printPseudoLiteral(const std::string& input);
 		static LiteralType findType(const std::string& input);
+		static void printCharFromInt(int number);
 
 		static void convertChar(const std::string& input);
 		static void convertInt(const std::string& input);
 		static void convertFloat(const std::string& input);
 		static void convertDouble(const std::string& input);
 
-		public:
-			static void convert(const std::string& input);
+	public:
+		static void convert(const std::string& input);
 };
 
 #endif

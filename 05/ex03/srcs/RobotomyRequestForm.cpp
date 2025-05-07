@@ -6,15 +6,11 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:11:29 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/04/22 18:14:28 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:31:48 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RobotomyRequestForm.hpp"
-
-// Required grades: sign 72, exec 45
-// Makes some drilling noises, then informs that <target> has been robotomized
-// successfully 50% of the time. Otherwise, it informs that the robotomy failed.
 
 RobotomyRequestForm::RobotomyRequestForm()
 	: AForm("RobotomyRequestForm", 72, 45) {

@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:35:28 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/04 12:58:34 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:31:14 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ AForm* Intern::makeForm(const std::string name, const std::string target) {
 }
 
 const char* Intern::FormNotFoundException::what() const throw() {
-	return("Intern: Intern Error: Requested form not found!");
+	return("Intern: Requested form not found!");
 }

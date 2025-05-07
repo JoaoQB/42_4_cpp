@@ -6,15 +6,11 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:11:13 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/04/22 18:11:35 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:32:41 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ShrubberyCreationForm.hpp"
-
-// Required grades: sign 145, exec 137
-// Creates a file <target>_shrubbery in the working directory and writes ASCII trees
-// inside it.
 
 ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("ShrubberyCreationForm", 145, 137) {

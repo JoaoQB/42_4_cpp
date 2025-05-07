@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:59:44 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/04 13:01:24 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:46:59 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,25 @@
 #include "../includes/Intern.hpp"
 
 int main() {
+	AForm* shrubbery = NULL;
+	AForm* robotomy = NULL;
+	AForm* pardon = NULL;
+	AForm* pardonNull = NULL;
+
 	try {
 		Bureaucrat boss("Alice", 1);
 		Bureaucrat internBureaucrat("Bob", 150);
 		Intern intern;
 
 		std::cout << "\n=== Intern Creates Forms ===\n";
-		AForm* shrubbery = intern.makeForm("shrubbery creation", "Garden");
-		AForm* robotomy = intern.makeForm("robotomy request", "Bender");
-		AForm* pardon = intern.makeForm("presidential pardon", "Ford Prefect");
+		shrubbery = intern.makeForm("shrubbery creation", "Garden");
+		robotomy = intern.makeForm("robotomy request", "Bender");
+		pardon = intern.makeForm("presidential pardon", "Ford Prefect");
+		pardonNull = NULL;
 
 		std::cout << "\n=== Boss Signs & Executes ===\n";
 		shrubbery->beSigned(boss);
+		shrubbery->beSigned(internBureaucrat);
 		shrubbery->execute(boss);
 
 		robotomy->beSigned(boss);
@@ -58,12 +65,14 @@ int main() {
 			std::cerr << "Unknown form error: " << e.what() << std::endl;
 		}
 
-		delete shrubbery;
-		delete robotomy;
-		delete pardon;
-
 	} catch (const std::exception& e) {
 		std::cerr << "Fatal error: " << e.what() << std::endl;
 	}
-	return 0;
+
+	delete shrubbery;
+	delete robotomy;
+	delete pardon;
+	delete pardonNull;
+
+	return (0);
 }

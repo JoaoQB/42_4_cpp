@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:50:31 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/03/30 12:20:53 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:08:17 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ class Form {
 				virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class FormAlreadySignedException : public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};

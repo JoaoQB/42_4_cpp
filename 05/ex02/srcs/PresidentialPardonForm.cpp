@@ -6,28 +6,25 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:11:51 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/04/22 18:10:26 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:00:11 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PresidentialPardonForm.hpp"
 
-// Required grades: sign 25, exec 5
-// Informs that <target> has been pardoned by Zaphod Beeblebrox.
-
 PresidentialPardonForm::PresidentialPardonForm()
-	: AForm("PresidentialPardonForm", 72, 45) {
+	: AForm("PresidentialPardonForm", 25, 5) {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-	: AForm("PresidentialPardonForm", 72, 45) {
+	: AForm("PresidentialPardonForm", 25, 5) {
 	this->target = target;
 	std::cout << "PresidentialPardonForm Constructor: Created with target \""
 			<< target << "\"\n";
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
-	: AForm("PresidentialPardonForm", 72, 45) {
+	: AForm("PresidentialPardonForm", 25, 5) {
 	this->target = other.target;
 	std::cout << "PresidentialPardonForm Copy Constructor: Copied with target \""
 			<< target << "\"\n";

@@ -6,15 +6,11 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:11:29 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/04/22 18:14:28 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:25:28 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RobotomyRequestForm.hpp"
-
-// Required grades: sign 72, exec 45
-// Makes some drilling noises, then informs that <target> has been robotomized
-// successfully 50% of the time. Otherwise, it informs that the robotomy failed.
 
 RobotomyRequestForm::RobotomyRequestForm()
 	: AForm("RobotomyRequestForm", 72, 45) {
@@ -54,7 +50,8 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 			<< target << "\"\n";
 	std::cout << "* LOUD DRILLING NOISES *\n";
 	srand(time(0));
-	if (rand() % 2) {
+	// Increase randomness/second
+	if ((rand() * 7) % 2) {
 		std::cout << "RobotomyRequestForm Execution: \"" << target << "\" has been successfully robotomized!\n";
 	} else {
 		std::cout << "RobotomyRequestForm Execution: Robotomy failed on \"" << target << "\"\n";

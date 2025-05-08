@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:00 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/07 14:07:34 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:30:19 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,31 @@
 
 int main() {
 	const std::string testCases[] = {
-		"a",         // CHAR
-		"z",         // CHAR
-		"0",         // INT
-		"42",        // INT
-		"   123   ", // INT with whitespace
-		"128",         // INT out of char range
-		"127",         // CHAR edge case
-		"-2147483648", // INT min
-		"2147483647",  // INT max
-		"-2147483649", // INT min - 1
-		"2147483648",  // INT max + 1
-		"3.14",      // DOUBLE
-		"2.71828",   // DOUBLE
-		"0.0",       // DOUBLE
-		"3.14f",     // FLOAT
-		"42.0f",     // FLOAT
-		"nan",       // DOUBLE pseudo-literal
-		"nanf",      // FLOAT pseudo-literal
-		"+inf",      // DOUBLE pseudo-literal
-		"-inff",     // FLOAT pseudo-literal
-		"++42",      // Invalid
-		"4..2",      // Invalid
-		"1.0ff",     // Invalid
-		"42f0",      // Invalid
-		"",          // Empty
-		" ",		 // Single Space
-		"     ",     // Whitespace only
-		"99999999999999999999999999999999", // Overflow
-		"-99999999999999999999999999999999", // Underflow
-		"#",         // Non-digit printable char
+		"a", "z", "0", "42", "   123   ",
+		"128", "127", "-2147483648", "2147483647",
+		"-2147483649", "2147483648", "3.14", "2.71828", "0.0",
+		"3.14f", "42.0f", "nan", "nanf", "+inf", "-inff",
+		"++42", "4..2", ".42", "42.", "", " ", "     ",
+		"9999999999999999999999999999999.9f",
+		"-999999999999999999999999999999999999999999999999999999999999999.9999999999999999999999999999999999999",
+		"#",
+
+		"  +0  ", "  -42  ",
+		"0.0000001", "1f", "42.0F",
+
+		"f", ".", "-", "+", "++", "--1", "inf", "inff", "nanff",
+		"123abc", "abc123", " 123 456 ",
+
+		"255", "256", "-129", "127.0", "32", "31",
+		"0.00000000000000000000000000000000000000000000000001",
+
+		"\t42\n", " \r\v\f123 ",
+
+		"NaN", "INF", "1.0.0", "1.0f0", "42f"
 	};
 
 	for (size_t i = 0; i < sizeof(testCases) / sizeof(testCases[0]); ++i) {
-		std::cout << "\n=== Test Case: \"" << testCases[i] << "\" ===" << std::endl;
+		std::cout << "\n=== Test Case [" << i << "]: \"" << testCases[i] << "\" ===\n";
 		ScalarConverter::convert(testCases[i]);
 	}
 	return 0;

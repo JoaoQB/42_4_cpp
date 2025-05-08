@@ -6,15 +6,11 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:41:09 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/07 14:14:22 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:52:54 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScalarConverter.hpp"
-
-void ScalarConverter::printErr(const std::string& error) {
-	std::cerr << error << std::endl;
-}
 
 std::string ScalarConverter::trimInput(const std::string& input) {
 	if (input.empty()) {
@@ -29,7 +25,7 @@ std::string ScalarConverter::trimInput(const std::string& input) {
 		throw std::invalid_argument("Invalid Input");
 	}
 	std::size_t end = input.find_last_not_of(whitespace);
-	return (input.substr(start, end - start + 1));
+	return input.substr(start, end - start + 1);
 }
 
 bool ScalarConverter::isPseudoLiteral(const std::string& input) {
@@ -39,29 +35,26 @@ bool ScalarConverter::isPseudoLiteral(const std::string& input) {
 	const size_t size = sizeof(pseudoLiterals) / sizeof(pseudoLiterals[0]);
 	for (size_t i = 0; i < size; ++i) {
 		if (input == pseudoLiterals[i]) {
-			return (true);
+			return true;
 		}
 	}
-	return (false);
+	return false;
 }
 
 void ScalarConverter::printPseudoLiteral(const std::string& input) {
+	const bool isFloat = (input == "-inff" || input == "+inff" || input == "nanf");
+	const std::string floatPart = isFloat ? input : input + 'f';
+	const std::string doublePart = isFloat ? input.substr(0, input.size() - 1) : input;
+
 	std::cout << "char: impossible\n";
 	std::cout << "int: impossible\n";
-	if (input == "-inff" || input == "+inff" || input == "nanf") {
-		std::cout << "float: " << input << "\n";
-		const std::string inputDouble = input.substr(0, input.size() - 1);
-		std::cout << "double: " << inputDouble << std::endl;
-	} else {
-		const std::string inputFloat = input + "f";
-		std::cout << "float: " << inputFloat << "\n";
-		std::cout << "double: " << input << std::endl;
-	}
+	std::cout << "float: " << floatPart << "\n";
+	std::cout << "double: " << doublePart << "\n";
 }
 
 LiteralType ScalarConverter::findType(const std::string& input) {
 	if (input.size() == 1 && isprint(input[0]) && !isdigit(input[0])) {
-		return (CHAR);
+		return CHAR;
 	}
 	bool hasDot = false;
 	bool hasF = false;
@@ -73,22 +66,26 @@ LiteralType ScalarConverter::findType(const std::string& input) {
 			hasDigit = true;
 		}
 		else if (c == '.') {
-			if (hasDot) return (INVALID);
+			if (hasDot) return INVALID;
 			hasDot = true;
 		}
 		else if (c == 'f') {
-			if (hasF || i != input.size() - 1) return (INVALID);
+			if (hasF || i != input.size() - 1) return INVALID;
 			hasF = true;
 		}
-		else return (INVALID);
+		else return INVALID;
 	}
-	if (!hasDigit) return (INVALID);
-	if (hasF) return (hasDot ? FLOAT : INVALID);
-	if (hasDot) return (DOUBLE);
-	return (INT);
+	if (!hasDigit) return INVALID;
+	if (hasF) return hasDot ? FLOAT : INVALID;
+	if (hasDot) return DOUBLE;
+	return INT;
 }
 
-void ScalarConverter::printCharFromInt(int number) {
+bool ScalarConverter::hasFloatSuffix(const std::string& input) {
+	return !input.empty() && input[input.size() - 1] == 'f';
+}
+
+void ScalarConverter::printCharFromDouble(double number) {
 	if (number > CHAR_MAX || number < CHAR_MIN) {
 		std::cout << "char: impossible\n";
 		return;
@@ -102,6 +99,7 @@ void ScalarConverter::printCharFromInt(int number) {
 	}
 }
 
+
 void ScalarConverter::convertChar(const std::string& input) {
 	char c = input[0];
 	int i = static_cast<int>(c);
@@ -114,25 +112,33 @@ void ScalarConverter::convertChar(const std::string& input) {
 	std::cout << "double: " << d << ".0\n";
 }
 
-void ScalarConverter::convertInt(const std::string& input) {
-	std::stringstream ss(input);
-	long result;
+void ScalarConverter::convertDouble(const std::string& input) {
+	const std::string numericPart = hasFloatSuffix(input)
+		? input.substr(0, input.size() - 1)
+		: input;
 
-	ss >> result;
-	if (ss.fail() || !ss.eof()) {
-		throw std::invalid_argument("Not an INT");
+	std::istringstream iss(numericPart);
+	double value;
+
+	iss >> value;
+	if (iss.fail() || !iss.eof()) {
+		throw std::invalid_argument("Failed to convert");
 	}
-	printCharFromInt(result);
-	if (result < INT_MIN || result > INT_MAX) {
+
+	printCharFromDouble(value);
+
+	if (value < INT_MIN || value > INT_MAX) {
 		std::cout << "int: impossible\n";
 	} else {
-		int i = static_cast<int>(result);
-		std::cout << "int: " << i << "\n";
+		const int intValue = static_cast<int>(value);
+		std::cout << "int: " << intValue << "\n";
 	}
-	float f = static_cast<float>(result);
-	double d = static_cast<double>(result);
-	std::cout << "float: " << f << ".0f\n";
-	std::cout << "double: " << d << ".0\n";
+
+	float floatValue = static_cast<float>(value);
+	double intPart = 0.0;
+	const bool isInteger = (modf(value, &intPart) == 0.0);
+	std::cout << "float: " << floatValue << (isInteger ? ".0f\n" : "f\n");
+	std::cout << "double: " << value << (isInteger ? ".0\n" : "\n");
 }
 
 void ScalarConverter::convert(const std::string& input) {
@@ -146,10 +152,8 @@ void ScalarConverter::convert(const std::string& input) {
 
 		switch (findType(trimmedInput)) {
 			case CHAR: convertChar(trimmedInput); break;
-			case INT: convertInt(trimmedInput); break;
-			// case FLOAT: convertFloat(trimmedInput); break;
-			// case DOUBLE: convertDouble(trimmedInput); break;
-			default: throw std::invalid_argument("Invalid Input");
+			case INVALID: throw std::invalid_argument("Invalid Input");
+			default: convertDouble(trimmedInput);
 		}
 	} catch (const std::exception& e) {
 		std::cout << "Error: " << e.what() << std::endl;

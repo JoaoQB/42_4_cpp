@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 12:02:23 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/10 12:32:59 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:21:01 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,11 @@ int main(void) {
 
 	std::cout << "[Pointer address]    dataPtr: " << dataPtr << "\n";
 	std::cout << "[Pointer address]    &myData: " << &myData << "\n";
+
+	Data *myData2 = NULL;
+	uintptr_t ptr2 = Serializer::serialize(myData2);
+	Data* dataPtr2 = Serializer::deserialize(ptr2);
+	std::cout << "[Pointer address]    dataPtr2: " << dataPtr2 << "\n";
+	std::cout << "[Pointer address]    &myData2: " << myData2 << "\n";
 }
 

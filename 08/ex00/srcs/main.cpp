@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 08:12:20 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/15 12:17:58 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:22:18 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int main(void) {
 	std::cout << "v3.back(): " << v3.back() << std::endl;
 	std::cout << "v3.at(2): " << v3.at(2) << std::endl;
 
-	// 8. Unsafe access
-	std::cout << "v3[10] (undefined behavior): " << v3[10] << std::endl;
+	// // 8. Unsafe access
+	// std::cout << "v3[10] (undefined behavior): " << v3[10] << std::endl;
 
 	// 9. Safe access
 	try {

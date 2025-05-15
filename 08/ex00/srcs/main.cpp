@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 08:12:20 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/13 09:34:28 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:17:58 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int main(void) {
 
 	int toFind = -10;
 	try {
-		std::vector<int>::iterator it = easyfind<std::vector<int>, std::vector<int>::iterator(v3, toFind);
+		std::vector<int>::iterator it = easyfind<std::vector<int>::iterator, std::vector<int> >(v3, toFind);
 		std::cout << "Found " << *it << " at index: " << (it - v3.begin()) << std::endl;
 	} catch (std::out_of_range &e) {
 		std::cout << toFind << " not found in vector." << std::endl;

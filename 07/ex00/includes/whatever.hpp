@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:26:37 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/10 18:00:56 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:09:41 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void swap(T& a, T& b) {
 }
 
 template <typename T>
-T& min(T& a, T& b) {
+const T& min(const T& a, const T& b) {
 	if (a <= b) return a;
 	return b;
 }
 
 template <typename T>
-T& max(T& a, T& b) {
+const T& max(const T& a, const T& b) {
 	if (a >= b) return a;
 	return b;
 }

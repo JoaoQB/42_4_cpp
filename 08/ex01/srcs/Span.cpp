@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:42:03 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/15 15:25:01 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:00:39 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,19 @@ void Span::addNumber(const int number) {
 	this->intVector.insert(this->intVector.end(), number);
 }
 
-double Span::shortestSpan() const {
+long Span::shortestSpan() const {
 	if (this->intVector.size() <= 1) {
 		throw std::logic_error("Cannot compute span: not enough elements.");
 	}
 	std::vector<int> tempVector = this->intVector;
 
-	// std::cout << "intVector before sorting:\n";// FOR DEBUG INIT
-	// std::vector<int>::const_iterator tempIt = tempVector.begin();
-	// for ( ; tempIt != tempVector.end(); ++tempIt) {
-	// 	std::cout << "Number: " << *tempIt << " , at index: "
-	// 		<< (tempIt - tempVector.begin()) << "\n";
-	// }// FOR DEBUG END
-
 	std::sort(tempVector.begin(), tempVector.end());
-
-	// std::cout << "intVector after sorting:\n";// FOR DEBUG INIT
-	// std::vector<int>::const_iterator it2 = tempVector.begin();
-	// for ( ; it2 != tempVector.end(); ++it2) {
-	// 	std::cout << "Number: " << *it2 << " , at index: "
-	// 		<< (it2 - tempVector.begin()) << "\n";
-	// }// FOR DEBUG END
 
 	std::vector<int>::const_iterator it = tempVector.begin();
 	std::vector<int>::const_iterator last = tempVector.end() - 1;
-	double shortestDistance = std::numeric_limits<double>::max();
+	long shortestDistance = std::numeric_limits<long>::max();
 	for ( ; it != last; ++it) {
-		double span = *(it + 1) - *it;
+		long span = *(it + 1) - *it;
 		if (span < shortestDistance) {
 			shortestDistance = span;
 		}
@@ -73,16 +59,24 @@ double Span::shortestSpan() const {
 	return shortestDistance;
 }
 
-double Span::longestSpan() const {
+long Span::longestSpan() const {
 	if (this->intVector.size() <= 1) {
 		throw std::logic_error("Cannot compute span: not enough elements.");
 	}
-	double min = *std::min_element(this->intVector.begin(), this->intVector.end());
-	double max = *std::max_element(this->intVector.begin(), this->intVector.end());
+	long min = *std::min_element(this->intVector.begin(), this->intVector.end());
+	long max = *std::max_element(this->intVector.begin(), this->intVector.end());
 	return max - min;
 }
 
-void Span::printVector() const { // FOR DEBUG
+void Span::addRandomNumbers(const unsigned int N) {
+	srand(time(0));
+	for (unsigned int i = 0; i < N; ++i) {
+		int random = rand();
+		addNumber(random);
+	}
+}
+
+void Span::printVector() const {
 	std::vector<int>::const_iterator it = this->intVector.begin();
 	if (it == this->intVector.end()) {
 		std::cout << "Empty vector\n\n";
@@ -93,8 +87,4 @@ void Span::printVector() const { // FOR DEBUG
 			<< (it - this->intVector.begin()) << "\n";
 	}
 	std::cout << "\n";
-}
-
-const std::vector<int>& Span::getVector() { // FOR DEBUG
-	return this->intVector;
 }

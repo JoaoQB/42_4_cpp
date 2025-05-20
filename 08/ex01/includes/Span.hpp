@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:31:59 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/05/15 15:18:56 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:01:50 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define SPAN_HPP
 
 # include <vector>
+# include <list>
 # include <stdexcept>
 # include <iostream>
 # include <algorithm>
 # include <limits>
+# include <ctime>
 
 class Span {
 	public:
@@ -27,10 +29,15 @@ class Span {
 		Span& operator=(const Span& src);
 
 		void addNumber(const int number);
-		double shortestSpan() const;
-		double longestSpan() const;
-		void printVector() const; // FOR DEBUG
-		const std::vector<int>& getVector(); // FOR DEBUG
+		long shortestSpan() const;
+		long longestSpan() const;
+
+		template <typename Container>
+		void addRange(typename Container::const_iterator begin,
+			typename Container::const_iterator end);
+
+		void addRandomNumbers(const unsigned int N);
+		void printVector() const;
 
 	private:
 		unsigned int maxSize;
@@ -39,4 +46,5 @@ class Span {
 		Span();
 };
 
+#include "Span.tpp"
 #endif

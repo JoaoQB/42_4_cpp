@@ -6,7 +6,7 @@
 #    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 16:18:54 by jqueijo-          #+#    #+#              #
-#    Updated: 2025/06/16 17:14:40 by jqueijo-         ###   ########.fr        #
+#    Updated: 2025/06/21 11:27:53 by jqueijo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_DIR = ./srcs
 OBJ_DIR = ./objs
 
 SRCS = $(SRC_DIR)/main.cpp \
+	$(SRC_DIR)/BitcoinExchange.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 DEPS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.d)))

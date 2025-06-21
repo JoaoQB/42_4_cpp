@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:54:15 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/16 19:53:08 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:20:59 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,55 @@
 
 # include <map>
 # include <string>
+# include <iostream>
+# include <fstream>
+# include <exception>
+# include <string>
+# include <cstdlib>
 
 class BitcoinExchange {
-	private:
-		std::map<std::string, float> valueByDateList;
-
 	public:
-		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange &src);
+		BitcoinExchange(const std::string& filePath);
+		BitcoinExchange(const BitcoinExchange& src);
 		~BitcoinExchange();
-		BitcoinExchange& operator=(const BitcoinExchange &src);
-		const std::map<std::string, float>& getValueByDateList() const;
+		BitcoinExchange& operator=(const BitcoinExchange& src);
+
+		// const std::map<std::string, float>& getPriceHistory() const;
+		void calculatePrices() const;
+
+	private:
+		std::string btcInputFilePath;
+		std::map<std::string, float> priceHistory;
+
+		BitcoinExchange();
+
+		void validateFilePath(const std::string& path) const;
+
+		bool validateDay(int year, int month, int day) const;
+		bool validateDate(const std::string& date) const;
+		std::string getDateFromLine(const std::string& line, const char delimiter) const;
+
+		float getValueFromLine(const std::string& line, const char delimiter) const;
+
+		void checkFilePath() const;
+		void setPriceHistory();
+
+		std::map<std::string, float>::const_iterator getClosestDate(const std::string& date) const;
+
+		enum Month {
+			JANUARY = 1,
+			FEBRUARY,
+			MARCH,
+			APRIL,
+			MAY,
+			JUNE,
+			JULY,
+			AUGUST,
+			SEPTEMBER,
+			OCTOBER,
+			NOVEMBER,
+			DECEMBER
+		};
 };
 
 #endif

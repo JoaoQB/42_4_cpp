@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:54:17 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/21 15:30:55 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:48:45 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ std::string BitcoinExchange::getDateFromLine(const std::string& line, const char
 	}
 	pos = line.at(pos - 1) == ' ' ? pos - 1 : pos;
 	std::string date = line.substr(0, pos);
-	// std::cout << date << "\n";
 	if (!validateDate(date)) {
 		throw std::runtime_error("invalid date format: " + line);
 	}

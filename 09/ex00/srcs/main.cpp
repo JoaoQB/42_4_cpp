@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:53:25 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/20 21:09:32 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:08:18 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int main(int argc, char **argv) {
 		btcCalculator.calculatePrices(); //TODO
 	} catch (const std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
+		return 1;
 	}
+	return 0;
 }

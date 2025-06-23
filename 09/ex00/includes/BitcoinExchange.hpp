@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:54:15 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/21 15:20:59 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:13:01 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <iostream>
 # include <fstream>
 # include <exception>
-# include <string>
 # include <cstdlib>
+# include <cerrno>
 
 class BitcoinExchange {
 	public:

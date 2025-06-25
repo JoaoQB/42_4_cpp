@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:42:45 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/23 15:35:10 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:32:05 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <cstdlib>
 # include <cerrno>
 # include <limits>
+# include <ctime>
 
 class PmergeMe {
 	public:
@@ -36,17 +37,29 @@ class PmergeMe {
 		std::vector<int> unsortedValues;
 		PmergeMe();
 
-		std::string trimInput(const std::string& input);
+		std::string trimInput(const std::string& input) const;
 		std::vector<int> parseInput(int argc, char** argv);
 
-		std::vector<int> insertionSortVector(const std::vector<int>& vector);
-		std::vector<int> mergeSortVector(const std::vector<int>& vector);
+		std::vector<int> insertionSortVector(const std::vector<int>& vector) const;
+		std::deque<int> insertionSortDeque(const std::deque<int>& deque) const;
 
-		std::deque<int> insertionSortDeque(const std::deque<int>& deque);
-		std::deque<int> mergeSortDeque(const std::deque<int>& deque);
+		void mergeSortVector(std::vector<int>& vector) const;
+		void mergeSortDeque(std::deque<int>& deque) const;
+
+		std::vector<size_t> generateJacobsthalIndices(size_t nbrOfElements);
+		std::vector<int>::iterator binarySearchInsertPos(std::vector<int>& main, int key, size_t elementSize) const;
+		void divideSortAndInsert(std::vector<int>& vector, size_t elementSize);
+		void fordJohnsonSortVector(std::vector<int>& vector);
+
+		void logTimeTaken(
+			const std::clock_t& start,
+			const std::clock_t& end,
+			const std::string& containerLabel,
+			int containerSize
+		) const;
 
 		template <typename T>
-		std::string printContainer(const T& container);
+		std::string printContainer(const T& container) const;// DEBUG
 };
 
 

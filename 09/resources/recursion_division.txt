@@ -1,0 +1,51 @@
+Og Sequence: 5 11 14 4 13 15 19 1 10 6
+
+Step 1: Divide into pairs
+
+5 - 11 ; 14 - 4 ; 13 - 15 ; 19 - 1 ; 10 - 6
+
+Step 2: Sort pairs
+
+5 - 11 ; 4 - 14 ; 13 - 15 ; 1 - 19 ; 6 - 10
+
+------------------------------------------------
+
+Og Sequence: 5 11 4 14 13 15 1 19 6 10
+
+Step 1: Divide into pairs of pairs
+
+5 11 - 4 14 ; 13 15 - 1 19 ; 6 - 10
+
+Step 2: Sort pairs of pairs
+
+5 11 - 4 14 ; 13 15 - 1 19 ; 6 - 10
+
+-------------------------------------------------
+
+Og Sequence: 5 11 4 14 13 15 1 19 6 10
+
+Step 1: Divide into pairs of pairs of pairs
+
+5 11 4 14 - 13 15 1 19 ; 6 - 10
+
+Step 2: Sort pairs of pairs of pairs
+
+5 11 4 14 - 13 15 1 19 ; 6 - 10
+
+------------------------------------------------
+
+cant break into larger chunks, break;
+
+Sequence: 5-11 14-4 13-15 19-1 10-6
+Index:    0  1  2 3  4  5  6 7  8 9
+
+Sequence: 5 11-14 4;13 15-19 1;10-6
+Index:    0  1  2 3  4  5  6 7  8 9
+
+i = 0
+elementSize = 1
+pairSize = 2
+
+i = 2
+elementSize = 1
+pairSize = 2

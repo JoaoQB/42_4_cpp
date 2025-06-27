@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:43:26 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/26 17:41:31 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/27 10:02:26 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void PmergeMe::mergeSortDeque(std::deque<int>& deque) const {
 	std::merge(left.begin(), left.end(), right.begin(), right.end(), deque.begin());
 }
 
-std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t nbrOfElements) const {
+std::vector<size_t> PmergeMe::generateJacobsthalIndicesVector(size_t nbrOfElements) const {
 	std::vector<size_t> jacobIndices;
 	size_t j1 = 0;
 	size_t j2 = 1;
@@ -137,7 +137,11 @@ std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t nbrOfElements) co
 	return jacobIndices;
 }
 
-std::vector<int>::iterator PmergeMe::binarySearchInsertPos(std::vector<int>& main, int key, size_t elementSize) const {
+std::vector<int>::iterator PmergeMe::binarySearchInsertPosVector(
+	std::vector<int>& main,
+	int key,
+	size_t elementSize
+) const {
 	size_t groupCount = main.size() / elementSize;
 	size_t leftGroup = 0;
 	size_t rightGroup = groupCount;
@@ -160,17 +164,13 @@ std::vector<int>::iterator PmergeMe::binarySearchInsertPos(std::vector<int>& mai
 	return main.begin() + insertOffset;
 }
 
-void PmergeMe::fillMainAndPend(
+void PmergeMe::fillMainAndPendVector(
 	const std::vector<int>& vector,
 	std::vector<int>& main,
 	std::vector<int>& pend,
 	size_t elementSize,
 	size_t elementCount
 ) const {
-	std::cout << "Inside Total Size: " << vector.size() << "\n"; //DEBUG
-	std::cout << "Inside Element Size: " << elementSize << "\n"; //DEBUG
-	std::cout << "Inside Element Count: " << elementCount << "\n"; //DEBUG
-	std::cout << "Vector:\n" << printContainer(vector) << "\n"; //DEBUG
 	// Insert b1 and a1 in main
 	size_t endOfA1 = 2 * elementSize;
 	main.insert(main.end(), vector.begin(), vector.begin() + endOfA1);
@@ -182,10 +182,8 @@ void PmergeMe::fillMainAndPend(
 			size_t start = i * elementSize;
 			size_t end = start + elementSize;
 			main.insert(main.end(), vector.begin() + start, vector.begin() + end);
-			// std::cout << "main start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
 		}
 	}
-	std::cout << "Main:\n" << printContainer(main) << "\n"; //DEBUG
 
 	// Insert b's from b2 onward in pend
 	for (size_t i = 2; i < elementCount; ++i) {
@@ -194,7 +192,6 @@ void PmergeMe::fillMainAndPend(
 			size_t start = i * elementSize;
 			size_t end = start + elementSize;
 			pend.insert(pend.end(), vector.begin() + start, vector.begin() + end);
-			// std::cout << "pend start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
 		}
 	}
 
@@ -203,22 +200,11 @@ void PmergeMe::fillMainAndPend(
 	if (leftoverStart < vector.size()) {
 		main.insert(main.end(), vector.begin() + leftoverStart, vector.end());
 	}
-
-	// DEBUG leftovers
-	std::vector<int> leftovers(vector.begin() + leftoverStart, vector.end());
-	std::cout << "Leftovers:\n" << printContainer(leftovers) << "\n";
-	std::cout << "Main:\n" << printContainer(main) << "\n"; //DEBUG
-
-	std::cout << "Pend:\n" << printContainer(pend) << "\n"; //DEBUG
 }
 
-void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize) {
-	// std::cout << "\nSequence before Divide and Sort:\n" << printContainer(vector) << "\n"; //DEBUG
+void PmergeMe::fordJohnsonSortVector(std::vector<int>& vector, size_t elementSize) {
 	size_t totalSize = vector.size();
 	size_t elementCount = totalSize / elementSize;
-	std::cout << "Beguinning Total Size: " << totalSize << "\n"; //DEBUG
-	std::cout << "Beguinning Element Size: " << elementSize << "\n"; //DEBUG
-	std::cout << "Beguinning Element Count: " << elementCount << "\n"; //DEBUG
 
 	if (elementCount < 2){
 		return ;
@@ -226,38 +212,25 @@ void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize)
 
 	size_t pairSize = elementSize * 2;
 
-	// std::vector<int>::iterator first = vector.begin(); //DEBUG
-	// std::cout << "element size: " << elementSize << "\n" << "pair size: " << pairSize << "\n"; //DEBUG
-
 	for (size_t i = 0; i + pairSize <= totalSize; i += pairSize) {
-		// std::cout << "i: " << i << "\n"; //DEBUG
-
 		std::vector<int>::iterator leftGroupIt = vector.begin() + i;
 		std::vector<int>::iterator rightGroupIt = leftGroupIt + elementSize;
 		size_t indexToCompare = elementSize - 1;
 		if (*(leftGroupIt + indexToCompare) > *(rightGroupIt + indexToCompare)) {
 			std::swap_ranges(leftGroupIt, rightGroupIt, rightGroupIt);
 		}
-
-		// std::cout << "leftGroup It at index: " << std::distance(first, leftGroupIt) << "\n"; //DEBUG
-		// std::cout << "rightGroup It at index: " << std::distance(first, rightGroupIt) << "\n"; //DEBUG
-		// std::cout << "leftGroup compare index: " << std::distance(first, leftGroupIt + indexToCompare) << "\n"; //DEBUG
-		// std::cout << "rightGroup compare index: " << std::distance(first, rightGroupIt + indexToCompare) << "\n"; //DEBUG
 	}
-	divideSortAndInsert(vector, pairSize);
 
-	std::cout << "After Total Size: " << totalSize << "\n"; //DEBUG
-	std::cout << "After Element Size: " << elementSize << "\n"; //DEBUG
-	std::cout << "After Element Count: " << elementCount << "\n"; //DEBUG
+	fordJohnsonSortVector(vector, pairSize);
 
 	std::vector<int> main;
 	std::vector<int> pend;
 
-	fillMainAndPend(vector, main, pend, elementSize, elementCount);
+	fillMainAndPendVector(vector, main, pend, elementSize, elementCount);
 
 	// Generate reverse JacobsthalIndices
 	size_t elementsInPend = pend.size() / elementSize;
-	std::vector<size_t> insertOrder = generateJacobsthalIndices(elementsInPend);
+	std::vector<size_t> insertOrder = generateJacobsthalIndicesVector(elementsInPend);
 
 	// Keep track of what indices were inserted
 	std::vector<bool> inserted(elementsInPend, false);
@@ -268,14 +241,14 @@ void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize)
 		if (index >= elementsInPend || inserted[index]) {
 			continue ;
 		}
+
 		size_t start = index * elementSize;
 		size_t end = start + elementSize;
 
 		std::vector<int> group(pend.begin() + start, pend.begin() + end);
 		int key = group[elementSize - 1];
 
-		std::vector<int>::iterator insertPos = binarySearchInsertPos(main, key, elementSize);
-		std::cout << "inserting group jacobsthal: " << printContainer(group) << "\n";
+		std::vector<int>::iterator insertPos = binarySearchInsertPosVector(main, key, elementSize);
 		main.insert(insertPos, group.begin(), group.end());
 		inserted[index] = true;
 	}
@@ -292,19 +265,162 @@ void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize)
 		std::vector<int> group(pend.begin() + start, pend.begin() + end);
 		int key = group[elementSize - 1];
 
-		std::vector<int>::iterator insertPos = binarySearchInsertPos(main, key, elementSize);
-		std::cout << "inserting group: " << printContainer(group) << "\n";
+		std::vector<int>::iterator insertPos = binarySearchInsertPosVector(main, key, elementSize);
 		main.insert(insertPos, group.begin(), group.end());
 	}
 
 	// Insert main into vector.
 	vector.assign(main.begin(), main.end());
-
 }
 
-void PmergeMe::fordJohnsonSortVector(std::vector<int>& vector) {
-	size_t elementSize = 1;
-	divideSortAndInsert(vector, elementSize);
+std::deque<size_t> PmergeMe::generateJacobsthalIndicesDeque(size_t nbrOfElements) const {
+	std::deque<size_t> jacobIndices;
+	size_t j1 = 0;
+	size_t j2 = 1;
+	while (j2 < nbrOfElements) {
+		jacobIndices.push_back(j2);
+		size_t next = j2 + 2 * j1;
+		j1 = j2;
+		j2 = next;
+	}
+	std::reverse(jacobIndices.begin(), jacobIndices.end());
+	return jacobIndices;
+}
+
+std::deque<int>::iterator PmergeMe::binarySearchInsertPosDeque(
+	std::deque<int>& main,
+	int key,
+	size_t elementSize
+) const {
+	size_t groupCount = main.size() / elementSize;
+	size_t leftGroup = 0;
+	size_t rightGroup = groupCount;
+
+	while (leftGroup < rightGroup) {
+		size_t midGroup = (leftGroup + rightGroup) / 2;
+		size_t midGroupOffset = midGroup * elementSize;
+		size_t midKeyIndex = midGroupOffset + elementSize - 1;
+
+		int midVal = *(main.begin() + midKeyIndex);
+
+		if (midVal < key) {
+			leftGroup = midGroup + 1;
+		} else {
+			rightGroup = midGroup;
+		}
+	}
+
+	size_t insertOffset = leftGroup * elementSize;
+	return main.begin() + insertOffset;
+}
+
+void PmergeMe::fillMainAndPendDeque(
+	const std::deque<int>& deque,
+	std::deque<int>& main,
+	std::deque<int>& pend,
+	size_t elementSize,
+	size_t elementCount
+) const {
+	// Insert b1 and a1 in main
+	size_t endOfA1 = 2 * elementSize;
+	main.insert(main.end(), deque.begin(), deque.begin() + endOfA1);
+
+	// Insert rest of a's in main
+	for (size_t i = 2; i < elementCount; ++i) {
+		// a elements are always odd
+		if (i % 2 == 1) {
+			size_t start = i * elementSize;
+			size_t end = start + elementSize;
+			main.insert(main.end(), deque.begin() + start, deque.begin() + end);
+		}
+	}
+
+	// Insert b's from b2 onward in pend
+	for (size_t i = 2; i < elementCount; ++i) {
+		// b elements are always even
+		if (i % 2 == 0) {
+			size_t start = i * elementSize;
+			size_t end = start + elementSize;
+			pend.insert(pend.end(), deque.begin() + start, deque.begin() + end);
+		}
+	}
+
+	// Insert leftovers in main
+	size_t leftoverStart = elementCount * elementSize;
+	if (leftoverStart < deque.size()) {
+		main.insert(main.end(), deque.begin() + leftoverStart, deque.end());
+	}
+}
+
+void PmergeMe::fordJohnsonSortDeque(std::deque<int>& deque, size_t elementSize) {
+	size_t totalSize = deque.size();
+	size_t elementCount = totalSize / elementSize;
+
+	if (elementCount < 2){
+		return ;
+	}
+
+	size_t pairSize = elementSize * 2;
+
+	for (size_t i = 0; i + pairSize <= totalSize; i += pairSize) {
+		std::deque<int>::iterator leftGroupIt = deque.begin() + i;
+		std::deque<int>::iterator rightGroupIt = leftGroupIt + elementSize;
+		size_t indexToCompare = elementSize - 1;
+		if (*(leftGroupIt + indexToCompare) > *(rightGroupIt + indexToCompare)) {
+			std::swap_ranges(leftGroupIt, rightGroupIt, rightGroupIt);
+		}
+	}
+
+	fordJohnsonSortDeque(deque, pairSize);
+
+	std::deque<int> main;
+	std::deque<int> pend;
+
+	fillMainAndPendDeque(deque, main, pend, elementSize, elementCount);
+
+	// Generate reverse JacobsthalIndices
+	size_t elementsInPend = pend.size() / elementSize;
+	std::deque<size_t> insertOrder = generateJacobsthalIndicesDeque(elementsInPend);
+
+	// Keep track of what indices were inserted
+	std::deque<bool> inserted(elementsInPend, false);
+
+	// Insert jacobsthal indices from pend into main
+	for (size_t i = 0; i < insertOrder.size(); ++i) {
+		size_t index = insertOrder[i];
+		if (index >= elementsInPend || inserted[index]) {
+			continue ;
+		}
+
+		size_t start = index * elementSize;
+		size_t end = start + elementSize;
+
+		std::deque<int> group(pend.begin() + start, pend.begin() + end);
+		int key = group[elementSize - 1];
+
+		std::deque<int>::iterator insertPos = binarySearchInsertPosDeque(main, key, elementSize);
+		main.insert(insertPos, group.begin(), group.end());
+		inserted[index] = true;
+	}
+
+	// Insert remaining pend in reverse order
+	int elemInPend = static_cast<int>(elementsInPend);
+	for (int i = elemInPend - 1; i >= 0; --i) {
+		if (inserted[i]) {
+			continue;
+		}
+
+		size_t start = i * elementSize;
+		size_t end = start + elementSize;
+		std::deque<int> group(pend.begin() + start, pend.begin() + end);
+		int key = group[elementSize - 1];
+
+		std::deque<int>::iterator insertPos = binarySearchInsertPosDeque(main, key, elementSize);
+		main.insert(insertPos, group.begin(), group.end());
+	}
+
+	// Insert main into deque.
+	deque.assign(main.begin(), main.end());
 }
 
 void PmergeMe::logTimeTaken(
@@ -319,52 +435,7 @@ void PmergeMe::logTimeTaken(
 	long time_taken_us = static_cast<long>(time_taken_sec * MICROSECONDS_IN_SECOND);
 
 	std::cout << "Time to process a range of " << containerSize << " elements"
-		" with std::" << containerLabel << " : " << time_taken_us << " us\n";
-}
-
-void PmergeMe::sortAndLog() {
-	const std::vector<int>& unsortedVector = this->unsortedValues;
-	// const std::deque<int> unsortedDeque(this->unsortedValues.begin(), this->unsortedValues.end());
-	// std::clock_t start, end;
-
-	// std::cout << "\nUnsorted Sequence:\n" << printContainer(unsortedVector) << "\n"; //DEBUG
-
-	// start = clock();
-	// std::vector<int> sortedInsertionVector = insertionSortVector(this->unsortedValues);
-	// end = clock();
-
-	// std::cout << "\nSorted Sequence:\n" << printContainer(sortedInsertionVector) << "\n"; //DEBUG
-
-	// std::cout << "\n========== INSERTION SORT ==========\n\n";
-	// logTimeTaken(start, end, "vector", sortedInsertionVector.size());
-
-
-	// // std::cout << "Unsorted Deque:\n" << printContainer(unsortedDeque) << "\n"; //DEBUG
-	// start = clock();
-	// std::deque<int> sortedInsertionDeque = insertionSortDeque(unsortedDeque);
-	// end = clock();
-	// logTimeTaken(start, end, "deque", sortedInsertionDeque.size());
-
-	// std::cout << "\n========== MERGE SORT ==========\n\n";
-	// // std::cout << "Unsorted Vector:\n" << printContainer(unsortedVector) << "\n"; //DEBUG
-	// std::vector<int> sortedMergeVector(unsortedVector);
-	// start = clock();
-	// mergeSortVector(sortedMergeVector);
-	// end = clock();
-	// logTimeTaken(start, end, "vector", sortedMergeVector.size());
-	// // std::cout << "\nSorted Vector:\n" << printContainer(sortedMergeVector) << "\n"; //DEBUG
-
-	// // std::cout << "Unsorted Deque:\n" << printContainer(unsortedDeque) << "\n"; //DEBUG
-	// std::deque<int> sortedMergeDeque(unsortedDeque);
-	// start = clock();
-	// mergeSortDeque(sortedMergeDeque);
-	// end = clock();
-	// logTimeTaken(start, end, "deque", sortedMergeDeque.size());
-	// // std::cout << "\nSorted Deque:\n" << printContainer(sortedMergeDeque) << "\n"; //DEBUG
-
-	std::vector<int> sortedVector(unsortedVector);
-	fordJohnsonSortVector(sortedVector);
-	std::cout << "\nSorted Vector:\n" << printContainer(sortedVector) << "\n";
+	" with std::" << containerLabel << " : " << time_taken_us << " us\n";
 }
 
 template <typename T>
@@ -380,4 +451,67 @@ std::string PmergeMe::printContainer(const T& container) const {
 		oss << *it << space;
 	}
 	return oss.str();
+}
+
+void PmergeMe::sortAndLog() {
+	const std::vector<int>& unsortedVector = this->unsortedValues;
+	std::vector<int> sortVector(unsortedVector);
+	std::deque<int> sortDeque(unsortedVector.begin(), unsortedVector.end());
+	size_t elementSize = 1;
+	std::clock_t start, end;
+
+	std::cout << "\nUnsorted Sequence:\n" << printContainer(unsortedVector) << "\n"; //DEBUG
+
+	start = clock();
+	fordJohnsonSortVector(sortVector, elementSize);
+	end = clock();
+
+	std::cout << "\nSorted Sequence:\n" << printContainer(sortVector) << "\n";
+	logTimeTaken(start, end, "vector", sortVector.size());
+
+	start = clock();
+	fordJohnsonSortDeque(sortDeque, elementSize);
+	end = clock();
+	logTimeTaken(start, end, "deque", sortDeque.size());
+}
+
+void PmergeMe::testInsertAndMerge() const {
+	const std::vector<int>& unsortedVector = this->unsortedValues;
+	const std::deque<int> unsortedDeque(this->unsortedValues.begin(), this->unsortedValues.end());
+	std::clock_t start, end;
+
+	std::cout << "\nUnsorted Sequence:\n" << printContainer(unsortedVector) << "\n"; //DEBUG
+
+	start = clock();
+	std::vector<int> sortedInsertionVector = insertionSortVector(this->unsortedValues);
+	end = clock();
+
+	std::cout << "\nSorted Sequence:\n" << printContainer(sortedInsertionVector) << "\n"; //DEBUG
+
+	std::cout << "\n========== INSERTION SORT ==========\n\n";
+	logTimeTaken(start, end, "vector", sortedInsertionVector.size());
+
+
+	// std::cout << "Unsorted Deque:\n" << printContainer(unsortedDeque) << "\n"; //DEBUG
+	start = clock();
+	std::deque<int> sortedInsertionDeque = insertionSortDeque(unsortedDeque);
+	end = clock();
+	logTimeTaken(start, end, "deque", sortedInsertionDeque.size());
+
+	std::cout << "\n========== MERGE SORT ==========\n\n";
+	// std::cout << "Unsorted Vector:\n" << printContainer(unsortedVector) << "\n"; //DEBUG
+	std::vector<int> sortedMergeVector(unsortedVector);
+	start = clock();
+	mergeSortVector(sortedMergeVector);
+	end = clock();
+	logTimeTaken(start, end, "vector", sortedMergeVector.size());
+	// std::cout << "\nSorted Vector:\n" << printContainer(sortedMergeVector) << "\n"; //DEBUG
+
+	// std::cout << "Unsorted Deque:\n" << printContainer(unsortedDeque) << "\n"; //DEBUG
+	std::deque<int> sortedMergeDeque(unsortedDeque);
+	start = clock();
+	mergeSortDeque(sortedMergeDeque);
+	end = clock();
+	logTimeTaken(start, end, "deque", sortedMergeDeque.size());
+	// std::cout << "\nSorted Deque:\n" << printContainer(sortedMergeDeque) << "\n"; //DEBUG
 }

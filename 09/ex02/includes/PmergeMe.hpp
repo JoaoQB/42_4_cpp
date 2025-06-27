@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:42:45 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/25 13:32:05 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:52:06 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,15 @@ class PmergeMe {
 		void mergeSortVector(std::vector<int>& vector) const;
 		void mergeSortDeque(std::deque<int>& deque) const;
 
-		std::vector<size_t> generateJacobsthalIndices(size_t nbrOfElements);
 		std::vector<int>::iterator binarySearchInsertPos(std::vector<int>& main, int key, size_t elementSize) const;
+		std::vector<size_t> generateJacobsthalIndices(size_t nbrOfElements) const;
+		void fillMainAndPend(
+			const std::vector<int>& vector,
+			std::vector<int>& main,
+			std::vector<int>& pend,
+			size_t elementSize,
+			size_t elementCount
+		) const;
 		void divideSortAndInsert(std::vector<int>& vector, size_t elementSize);
 		void fordJohnsonSortVector(std::vector<int>& vector);
 

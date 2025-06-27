@@ -6,7 +6,7 @@
 /*   By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 11:43:26 by jqueijo-          #+#    #+#             */
-/*   Updated: 2025/06/25 13:44:48 by jqueijo-         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:41:31 by jqueijo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void PmergeMe::mergeSortDeque(std::deque<int>& deque) const {
 	std::merge(left.begin(), left.end(), right.begin(), right.end(), deque.begin());
 }
 
-std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t nbrOfElements) {
+std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t nbrOfElements) const {
 	std::vector<size_t> jacobIndices;
 	size_t j1 = 0;
 	size_t j2 = 1;
@@ -160,10 +160,65 @@ std::vector<int>::iterator PmergeMe::binarySearchInsertPos(std::vector<int>& mai
 	return main.begin() + insertOffset;
 }
 
+void PmergeMe::fillMainAndPend(
+	const std::vector<int>& vector,
+	std::vector<int>& main,
+	std::vector<int>& pend,
+	size_t elementSize,
+	size_t elementCount
+) const {
+	std::cout << "Inside Total Size: " << vector.size() << "\n"; //DEBUG
+	std::cout << "Inside Element Size: " << elementSize << "\n"; //DEBUG
+	std::cout << "Inside Element Count: " << elementCount << "\n"; //DEBUG
+	std::cout << "Vector:\n" << printContainer(vector) << "\n"; //DEBUG
+	// Insert b1 and a1 in main
+	size_t endOfA1 = 2 * elementSize;
+	main.insert(main.end(), vector.begin(), vector.begin() + endOfA1);
+
+	// Insert rest of a's in main
+	for (size_t i = 2; i < elementCount; ++i) {
+		// a elements are always odd
+		if (i % 2 == 1) {
+			size_t start = i * elementSize;
+			size_t end = start + elementSize;
+			main.insert(main.end(), vector.begin() + start, vector.begin() + end);
+			// std::cout << "main start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
+		}
+	}
+	std::cout << "Main:\n" << printContainer(main) << "\n"; //DEBUG
+
+	// Insert b's from b2 onward in pend
+	for (size_t i = 2; i < elementCount; ++i) {
+		// b elements are always even
+		if (i % 2 == 0) {
+			size_t start = i * elementSize;
+			size_t end = start + elementSize;
+			pend.insert(pend.end(), vector.begin() + start, vector.begin() + end);
+			// std::cout << "pend start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
+		}
+	}
+
+	// Insert leftovers in main
+	size_t leftoverStart = elementCount * elementSize;
+	if (leftoverStart < vector.size()) {
+		main.insert(main.end(), vector.begin() + leftoverStart, vector.end());
+	}
+
+	// DEBUG leftovers
+	std::vector<int> leftovers(vector.begin() + leftoverStart, vector.end());
+	std::cout << "Leftovers:\n" << printContainer(leftovers) << "\n";
+	std::cout << "Main:\n" << printContainer(main) << "\n"; //DEBUG
+
+	std::cout << "Pend:\n" << printContainer(pend) << "\n"; //DEBUG
+}
+
 void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize) {
 	// std::cout << "\nSequence before Divide and Sort:\n" << printContainer(vector) << "\n"; //DEBUG
 	size_t totalSize = vector.size();
 	size_t elementCount = totalSize / elementSize;
+	std::cout << "Beguinning Total Size: " << totalSize << "\n"; //DEBUG
+	std::cout << "Beguinning Element Size: " << elementSize << "\n"; //DEBUG
+	std::cout << "Beguinning Element Count: " << elementCount << "\n"; //DEBUG
 
 	if (elementCount < 2){
 		return ;
@@ -191,49 +246,26 @@ void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize)
 	}
 	divideSortAndInsert(vector, pairSize);
 
+	std::cout << "After Total Size: " << totalSize << "\n"; //DEBUG
+	std::cout << "After Element Size: " << elementSize << "\n"; //DEBUG
+	std::cout << "After Element Count: " << elementCount << "\n"; //DEBUG
+
 	std::vector<int> main;
 	std::vector<int> pend;
 
-	// Insert b1 and a1 in main
-	size_t endOfA1 = 2 * elementSize;
-	main.insert(main.end(), vector.begin(), vector.begin() + endOfA1);
-
-	// Insert rest of a's in main
-	for (size_t i = 2; i < elementCount; ++i) {
-		// a elements are always odd
-		if (i % 2 == 1) {
-			size_t start = i * elementSize;
-			size_t end = start + elementSize;
-			main.insert(main.end(), vector.begin() + start, vector.begin() + end);
-			// std::cout << "main start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
-		}
-	}
-
-	// Insert b's from b2 onward in pend
-	for (size_t i = 2; i < elementCount; ++i) {
-		// b elements are always even
-		if (i % 2 == 0) {
-			size_t start = i * elementSize;
-			size_t end = start + elementSize;
-			pend.insert(pend.end(), vector.begin() + start, vector.begin() + end);
-			// std::cout << "pend start: " << start << "\n" << "end: " << end << "\n"; //DEBUG
-		}
-	}
-
-	// Insert leftovers in pend
-	size_t leftoverStart = elementCount * elementSize;
-	if (leftoverStart < totalSize) {
-		pend.insert(pend.end(), vector.begin() + leftoverStart, vector.end());
-	}
+	fillMainAndPend(vector, main, pend, elementSize, elementCount);
 
 	// Generate reverse JacobsthalIndices
 	size_t elementsInPend = pend.size() / elementSize;
 	std::vector<size_t> insertOrder = generateJacobsthalIndices(elementsInPend);
 
-	// Insert pend into main according to indices
+	// Keep track of what indices were inserted
+	std::vector<bool> inserted(elementsInPend, false);
+
+	// Insert jacobsthal indices from pend into main
 	for (size_t i = 0; i < insertOrder.size(); ++i) {
 		size_t index = insertOrder[i];
-		if (index >= elementsInPend) {
+		if (index >= elementsInPend || inserted[index]) {
 			continue ;
 		}
 		size_t start = index * elementSize;
@@ -243,11 +275,31 @@ void PmergeMe::divideSortAndInsert(std::vector<int>& vector, size_t elementSize)
 		int key = group[elementSize - 1];
 
 		std::vector<int>::iterator insertPos = binarySearchInsertPos(main, key, elementSize);
+		std::cout << "inserting group jacobsthal: " << printContainer(group) << "\n";
+		main.insert(insertPos, group.begin(), group.end());
+		inserted[index] = true;
+	}
+
+	// Insert remaining pend in reverse order
+	int elemInPend = static_cast<int>(elementsInPend);
+	for (int i = elemInPend - 1; i >= 0; --i) {
+		if (inserted[i]) {
+			continue;
+		}
+
+		size_t start = i * elementSize;
+		size_t end = start + elementSize;
+		std::vector<int> group(pend.begin() + start, pend.begin() + end);
+		int key = group[elementSize - 1];
+
+		std::vector<int>::iterator insertPos = binarySearchInsertPos(main, key, elementSize);
+		std::cout << "inserting group: " << printContainer(group) << "\n";
 		main.insert(insertPos, group.begin(), group.end());
 	}
 
 	// Insert main into vector.
 	vector.assign(main.begin(), main.end());
+
 }
 
 void PmergeMe::fordJohnsonSortVector(std::vector<int>& vector) {

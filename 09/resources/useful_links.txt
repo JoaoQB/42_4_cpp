@@ -1,0 +1,13 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    useful_links.txt                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jqueijo- <jqueijo-@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/26 08:35:14 by jqueijo-          #+#    #+#              #
+#    Updated: 2025/06/26 08:35:46 by jqueijo-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+https://dev.to/emuminov/human-explanation-and-step-by-step-visualisation-of-the-ford-johnson-algorithm-5g91

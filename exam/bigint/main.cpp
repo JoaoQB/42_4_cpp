@@ -7,22 +7,38 @@ int main() {
     Bigint fromInt(12345);
     Bigint fromString("987654");
     Bigint copy(fromInt);
+    Bigint test(0000000012);
 
     std::cout << "empty = " << empty << std::endl;
     std::cout << "fromInt = " << fromInt << std::endl;
     std::cout << "fromString = " << fromString << std::endl;
     std::cout << "copy(fromInt) = " << copy << std::endl;
+    std::cout << "test = " << test << std::endl;
 
-    Bigint a("4257");
+    Bigint a("4259");
     Bigint b(42);
 
     std::cout << "\n-- Addition --\n";
     std::cout << "a + b = " << a + b << std::endl;
     std::cout << "a + 42 = " << a + 42 << std::endl;
 
-    // std::cout << "\n-- Subtraction --\n";
-    // std::cout << "fromString - fromInt = " << fromString - fromInt << std::endl;
-    // std::cout << "fromInt - b = " << fromInt - b << std::endl;
+    std::cout << "\n-- Subtraction --\n";
+    std::cout << "fromString - fromInt = " << fromString - fromInt << std::endl;
+    std::cout << "fromInt - b = " << fromInt - b << std::endl;
+
+    std::string aString = "42";
+    std::string bString = "42398";
+    std::string zero = "0";
+
+    std::cout << "Shift left tests:" << std::endl;
+    std::cout << "42 << 3 = " << Bigint::shiftLeft(aString, 3) << std::endl;
+    std::cout << "42 << 0 = " << Bigint::shiftLeft(aString, 0) << std::endl;
+    std::cout << "0 << 5 = " << Bigint::shiftLeft(zero, 5) << std::endl;
+
+    std::cout << "\nShift right tests:" << std::endl;
+    std::cout << "42398 >> 3 = " << Bigint::shiftRight(bString, 3) << std::endl;
+    std::cout << "42398 >> 0 = " << Bigint::shiftRight(bString, 0) << std::endl;
+    std::cout << "42 >> 2 = " << Bigint::shiftRight(aString, 2) << std::endl;
 
     // std::cout << "\n-- Multiplication --\n";
     // std::cout << "b * 100 = " << b * Bigint(100) << std::endl;

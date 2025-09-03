@@ -1,34 +1,46 @@
-#ifndef BIGINT_HPP
-# define BIGINT_HPP
+//
+//
+//
 
-# include <string>
-# include <iostream>
-# include <sstream>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <cstdlib>
 
 class Bigint {
-	private:
-		bool isOnlyDigits(const std::string& string);
-		std::string normalize(const std::string& value);
-		void padValues(std::string& value, std::string& otherValue);
+private:
 
-	public:
-		std::string rawValue;
-		static const unsigned int base = 10;
+	static bool isOnlyDigits(const std::string& string);
+	static std::string normalize(const std::string& value);
+	static void padValues(std::string&a, std::string& b);
+	static std::string sumValues(const std::string& a, const std::string& b);
 
-		Bigint();
-		Bigint(unsigned int value);
-		Bigint(const std::string& value);
-		Bigint(const Bigint& src);
-		Bigint operator+(const Bigint& other);
-		Bigint operator+(unsigned int value);
-		Bigint operator-(const Bigint& other);
-		Bigint operator-(unsigned int value);
+public:
+	std::string rawValue;
 
-		static std::string shiftLeft(const std::string& value,unsigned int n);
-		static std::string shiftRight(const std::string& value,unsigned int n);
+	Bigint();
+	Bigint(std::string value);
+	Bigint(unsigned int value);
+	Bigint(const Bigint& src);
+	~Bigint();
+	Bigint& operator=(const Bigint& other);
+	Bigint& operator=(unsigned int integer);
+
+	Bigint operator+(const Bigint& other) const;
+	Bigint operator+(unsigned int integer) const;
+	Bigint& operator+=(const Bigint& other);
+	Bigint& operator+=(unsigned int integer);
+
+	Bigint operator<<(unsigned int integer) const;
+	Bigint operator<<(const Bigint& other) const;
+	Bigint& operator<<=(unsigned int integer);
+	Bigint& operator<<=(const Bigint& other);
+
+	Bigint operator>>(unsigned int integer) const;
+	Bigint operator>>(const Bigint& other) const;
+	Bigint& operator>>=(unsigned int integer);
+	Bigint& operator>>=(const Bigint& other);
 };
 
-std::ostream& operator<<(std::ostream& out, Bigint& bigint);
-std::ostream& operator<<(std::ostream& out, const Bigint& bigint);
-
-#endif
+std::ostream& operator<<(std::ostream& out, Bigint& src);
+std::ostream& operator<<(std::ostream& out, const Bigint& src);

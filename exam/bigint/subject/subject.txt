@@ -26,18 +26,12 @@ int main() {
     BigInt a("4257");
     BigInt b(42);
 
+    // ===== Addition =====
     std::cout << "\n-- Addition --\n";
     std::cout << "a + b = " << a + b << std::endl;
     std::cout << "a + 42 = " << a + 42 << std::endl;
 
-    std::cout << "\n-- Subtraction --\n";
-    std::cout << "fromString - fromInt = " << fromString - fromInt << std::endl;
-    std::cout << "fromInt - b = " << fromInt - b << std::endl;
-
-    std::cout << "\n-- Multiplication --\n";
-    std::cout << "b * 100 = " << b * BigInt(100) << std::endl;
-    std::cout << "a * b = " << a * b << std::endl;
-
+    // ===== Digit Shifting =====
     std::cout << "\n-- Digit Shifting --\n";
     std::cout << "b << 4 = " << (b << 4) << std::endl;
     std::cout << "fromInt >> 2 = " << (fromInt >> 2) << std::endl;
@@ -48,29 +42,23 @@ int main() {
     shiftTest >>= 4;
     std::cout << "shiftTest >>= 4 -> " << shiftTest << std::endl;
 
+    // Test with BigInt as shift amount
+    BigInt shiftVal(2);
+    a >>= shiftVal;
+    std::cout << "a >>= (const BigInt)2 -> " << a << std::endl;
+
+    // ===== Comparisons =====
+    std::cout << "\n-- Comparisons --\n";
+    std::cout << "fromInt == copy: " << (fromInt == copy) << std::endl;
+    std::cout << "fromInt != b: " << (fromInt != b) << std::endl;
+    std::cout << "fromInt > b: " << (fromInt > b) << std::endl;
+    std::cout << "fromInt < fromString: " << (fromInt < fromString) << std::endl;
+    std::cout << "fromInt <= copy: " << (fromInt <= copy) << std::endl;
+    std::cout << "fromInt >= copy: " << (fromInt >= copy) << std::endl;
+
+    // ===== Complex Expression =====
     std::cout << "\n-- Complex Expressions --\n";
-    std::cout << "((a + b) <<= 3) + 42 = "
-              << ((a + b) <<= 3) + 42 << std::endl;
-
-    BigInt chain("999");
-    std::cout << "((chain * 2) >> 1) + (b << 2) = "
-              << ((chain * BigInt(2)) >> 1) + (b << 2) << std::endl;
-
-    std::cout << "\n-- Stress Test (Large Numbers) --\n";
-    BigInt big1("999999999999999999999999999999999999999999");
-    BigInt big2("888888888888888888888888888888888888888888");
-
-    std::cout << "big1 + big2 = " << big1 + big2 << std::endl;
-    std::cout << "big1 * 42 = " << big1 * BigInt(42) << std::endl;
-
-    BigInt bigShift("123456789");
-    bigShift <<= 15;
-    std::cout << "bigShift <<= 15 = " << bigShift << std::endl;
-    bigShift >>= 10;
-    std::cout << "bigShift >>= 10 = " << bigShift << std::endl;
-
-    BigInt giantSum = ((big1 + big2) * BigInt(123456789)) << 5;
-    std::cout << "((big1 + big2) * 123456789) << 5 = " << giantSum << std::endl;
+    std::cout << "((a + b) << 3) + 42 = " << ((a + b) << 3) + 42 << std::endl;
 
     return 0;
 }

@@ -5,79 +5,49 @@
 #include <iostream>
 #include "Bigint.hpp"
 
-int main() {
-	// ===== Constructor Tests =====
-	Bigint empty;
-	Bigint fromInt(12345);
-	Bigint fromString("987654");
-	Bigint copy(fromInt);
-	Bigint test(0000000012);
-	Bigint a("4257");
-	Bigint b(42);
-	Bigint shiftTest("123456");
+int main(void)
+{
+	const Bigint a(42);
+	Bigint b(21), c, d(1337), e(d);
 
-	std::cout << "empty = " << empty << std::endl;
-	std::cout << "fromInt = " << fromInt << std::endl;
-	std::cout << "fromString = " << fromString << std::endl;
-	std::cout << "copy(fromInt) = " << copy << std::endl;
-	std::cout << "test = " << test << std::endl;
-	std::cout << "test = " << test << std::endl;
+	// base test
 	std::cout << "a = " << a << std::endl;
 	std::cout << "b = " << b << std::endl;
-	std::cout << "shiftTest = " << shiftTest << std::endl;
+	std::cout << "c = " << c << std::endl;
+	std::cout << "d = " << d << std::endl;
+	std::cout << "e = " << e << std::endl;
 
-	// ===== Addition =====
-	std::cout << "\n-- Addition --\n";
 	std::cout << "a + b = " << a + b << std::endl;
-	std::cout << "a += b = " << (a += b) << std::endl;
-	std::cout << "a + 42 = " << a + 42 << std::endl;
-	std::cout << "a += 42 = " << (a += 42) << std::endl;
+	std::cout << "a + c = " << a + c << std::endl;
+	std::cout << "(c += a) = " << (c += a) << std::endl;
 
-	std::cout << "empty = " << empty << std::endl;
-	std::cout << "fromInt = " << fromInt << std::endl;
-	std::cout << "fromString = " << fromString << std::endl;
-	std::cout << "copy(fromInt) = " << copy << std::endl;
-	std::cout << "test = " << test << std::endl;
-	std::cout << "test = " << test << std::endl;
-	std::cout << "a = " << a << std::endl;
 	std::cout << "b = " << b << std::endl;
-	std::cout << "shiftTest = " << shiftTest << std::endl;
+	std::cout << "++b = " << ++b << std::endl;
+	std::cout << "b++ = " << b++ << std::endl;
 
-	// ===== Digit Shifting =====
-	std::cout << "\n-- Digit Shifting --\n";
-	std::cout << "b << 4 = " << (b << 4) << std::endl;
-	std::cout << "fromInt >> 2 = " << (fromInt >> 2) << std::endl;
+	// b = 23, b << 10 -> 23000000000 + 42 = 23000000042
+	std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
+	std::cout << "(d <<= 4) = " << (d <<= 4) << ", d: " << d << std::endl;
+	std::cout << "(d >>= 2) = " << (d >>= (const Bigint)2) << ", d: " << d << std::endl;
 
-	shiftTest <<= 3;
-	std::cout << "shiftTest <<= 3 -> " << shiftTest << std::endl;
-	shiftTest >>= 4;
-	std::cout << "shiftTest >>= 4 -> " << shiftTest << std::endl;
+	std::cout << "a = " << a << std::endl; // a = 42
+	std::cout << "d = " << d << std::endl; // d = 5348
 
-	// Test with Bigint as shift amount
-	std::cout << "(a >>= (Bigint)2) -> " << (a >>= (Bigint)2) << std::endl;
+	std::cout << "(d < a) = " << (d < a) << std::endl; // (d < a) = 0
+	std::cout << "(d > a) = " << (d > a) << std::endl; // (d > a) = 1
+	std::cout << "(d == d) = " << (d == d) << std::endl; // (d == d) = 1
+	std::cout << "(d != a) = " << (d != a) << std::endl; // (d != a) = 1
+	std::cout << "(d <= a) = " << (d <= a) << std::endl; // (d <= a) = 0
+	std::cout << "(d >= a) = " << (d >= a) << std::endl; // (d >= a) = 1
 
-	std::cout << "empty = " << empty << std::endl;
-	std::cout << "fromInt = " << fromInt << std::endl;
-	std::cout << "fromString = " << fromString << std::endl;
-	std::cout << "copy(fromInt) = " << copy << std::endl;
-	std::cout << "test = " << test << std::endl;
-	std::cout << "test = " << test << std::endl;
-	std::cout << "a = " << a << std::endl;
-	std::cout << "b = " << b << std::endl;
-	std::cout << "shiftTest = " << shiftTest << std::endl;
+	// extra
+	Bigint x(12345678); Bigint y(5);
+	std::cout << "(x << y) = " << (x << y) << ", x: " << x << ", y: " << y << std::endl;
+	std::cout << "(x >>= y) = " << (x >>= y) << ", x: " << x << ", y: " << y << std::endl;
+	std::cout << "(x >= y) = " << (x >= y) << ", x: " << x << ", y: " << y << std::endl;
 
-	// ===== Comparisons =====
-	// std::cout << "\n-- Comparisons --\n";
-	// std::cout << "fromInt == copy: " << (fromInt == copy) << std::endl;
-	// std::cout << "fromInt != b: " << (fromInt != b) << std::endl;
-	// std::cout << "fromInt > b: " << (fromInt > b) << std::endl;
-	// std::cout << "fromInt < fromString: " << (fromInt < fromString) << std::endl;
-	// std::cout << "fromInt <= copy: " << (fromInt <= copy) << std::endl;
-	// std::cout << "fromInt >= copy: " << (fromInt >= copy) << std::endl;
+	std::cout << "x= " << (x <<= 5) << ", y= " << (y <<= 12) << std::endl;
+	std::cout << "(x >= y) = " << (x >= y) << ", x: " << x << ", y: " << y << std::endl;
 
-	// ===== Complex Expression =====
-	std::cout << "\n-- Complex Expressions --\n";
-	std::cout << "((a + b) << 3) + 42 = " << ((a + b) << 3) + 42 << std::endl;
-
-	return 0;
+	return (0);
 }

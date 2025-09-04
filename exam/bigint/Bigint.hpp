@@ -19,7 +19,7 @@ public:
 	std::string rawValue;
 
 	Bigint();
-	Bigint(std::string value);
+	Bigint(const std::string& value);
 	Bigint(unsigned int value);
 	Bigint(const Bigint& src);
 	~Bigint();
@@ -31,6 +31,9 @@ public:
 	Bigint& operator+=(const Bigint& other);
 	Bigint& operator+=(unsigned int integer);
 
+	Bigint operator++(int);
+	Bigint& operator++();
+
 	Bigint operator<<(unsigned int integer) const;
 	Bigint operator<<(const Bigint& other) const;
 	Bigint& operator<<=(unsigned int integer);
@@ -40,6 +43,14 @@ public:
 	Bigint operator>>(const Bigint& other) const;
 	Bigint& operator>>=(unsigned int integer);
 	Bigint& operator>>=(const Bigint& other);
+
+	bool operator>(const Bigint& other) const;
+	bool operator<(const Bigint& other) const;
+	bool operator!=(const Bigint& other) const;
+	bool operator==(const Bigint& other) const;
+	bool operator>=(const Bigint& other) const;
+	bool operator<=(const Bigint& other) const;
+
 };
 
 std::ostream& operator<<(std::ostream& out, Bigint& src);

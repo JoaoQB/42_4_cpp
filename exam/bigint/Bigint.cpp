@@ -7,7 +7,7 @@
 Bigint::Bigint() : rawValue("0") {
 }
 
-Bigint::Bigint(std::string value) {
+Bigint::Bigint(const std::string& value) {
 	if (isOnlyDigits(value)) {
 		rawValue = normalize(value);
 	} else {
@@ -75,6 +75,18 @@ Bigint& Bigint::operator+=(unsigned int integer) {
 	return *this;
 }
 
+Bigint Bigint::operator++(int) {
+	Bigint before(*this);
+	*this += 1;
+	return before;
+}
+
+Bigint& Bigint::operator++() {
+	*this += 1;
+
+	return *this;
+}
+
 Bigint Bigint::operator<<(unsigned int integer) const {
 	std::string resultString(rawValue);
 	resultString.append(integer, '0');
@@ -130,6 +142,35 @@ Bigint& Bigint::operator>>=(const Bigint& other) {
 	*this = *this >> other;
 
 	return *this;
+}
+
+bool Bigint::operator>(const Bigint& other) const {
+	const int sizeA = this->rawValue.size();
+	const int sizeB = other.rawValue.size();
+	if (sizeA != sizeB) {
+		return sizeA > sizeB;
+	}
+	return rawValue > other.rawValue;
+}
+
+bool Bigint::operator<(const Bigint& other) const {
+	return other > *this;
+}
+
+bool Bigint::operator==(const Bigint& other) const {
+	return rawValue == other.rawValue;
+}
+
+bool Bigint::operator!=(const Bigint& other) const {
+	return !(*this == other);
+}
+
+bool Bigint::operator>=(const Bigint& other) const {
+	return *this > other || *this == other;
+}
+
+bool Bigint::operator<=(const Bigint& other) const {
+	return *this < other || *this == other;
 }
 
 bool Bigint::isOnlyDigits(const std::string& string) {

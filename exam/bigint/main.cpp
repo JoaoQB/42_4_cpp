@@ -25,22 +25,20 @@ int main(void)
 	std::cout << "++b = " << ++b << std::endl;
 	std::cout << "b++ = " << b++ << std::endl;
 
-	// b = 23, b << 10 -> 23000000000 + 42 = 23000000042
 	std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
 	std::cout << "(d <<= 4) = " << (d <<= 4) << ", d: " << d << std::endl;
 	std::cout << "(d >>= 2) = " << (d >>= (const Bigint)2) << ", d: " << d << std::endl;
 
-	std::cout << "a = " << a << std::endl; // a = 42
-	std::cout << "d = " << d << std::endl; // d = 5348
+	std::cout << "a = " << a << std::endl;
+	std::cout << "d = " << d << std::endl;
 
-	std::cout << "(d < a) = " << (d < a) << std::endl; // (d < a) = 0
-	std::cout << "(d > a) = " << (d > a) << std::endl; // (d > a) = 1
-	std::cout << "(d == d) = " << (d == d) << std::endl; // (d == d) = 1
-	std::cout << "(d != a) = " << (d != a) << std::endl; // (d != a) = 1
-	std::cout << "(d <= a) = " << (d <= a) << std::endl; // (d <= a) = 0
-	std::cout << "(d >= a) = " << (d >= a) << std::endl; // (d >= a) = 1
+	std::cout << "(d < a) = " << (d < a) << std::endl;
+	std::cout << "(d > a) = " << (d > a) << std::endl;
+	std::cout << "(d == d) = " << (d == d) << std::endl;
+	std::cout << "(d != a) = " << (d != a) << std::endl;
+	std::cout << "(d <= a) = " << (d <= a) << std::endl;
+	std::cout << "(d >= a) = " << (d >= a) << std::endl;
 
-	// extra
 	Bigint x(12345678); Bigint y(5);
 	std::cout << "(x << y) = " << (x << y) << ", x: " << x << ", y: " << y << std::endl;
 	std::cout << "(x >>= y) = " << (x >>= y) << ", x: " << x << ", y: " << y << std::endl;

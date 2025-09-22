@@ -24,9 +24,9 @@ int main(int argc, char **argv) {
 
 	try {
 		std::string requestFilePath = argv[1];
-		BitcoinExchange btcCalculator(requestFilePath); //TODO
+		BitcoinExchange btcCalculator(requestFilePath);
 
-		btcCalculator.calculatePrices(); //TODO
+		btcCalculator.calculatePrices();
 	} catch (const std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
 		return 1;

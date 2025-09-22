@@ -134,6 +134,7 @@ std::vector<size_t> PmergeMe::generateJacobsthalIndicesVector(size_t nbrOfElemen
 		j2 = next;
 	}
 	std::reverse(jacobIndices.begin(), jacobIndices.end());
+	// std::cout << "[DEBUG]: Jacobindices\n" << printContainer(jacobIndices);
 	return jacobIndices;
 }
 
@@ -171,6 +172,8 @@ void PmergeMe::fillMainAndPendVector(
 	size_t elementSize,
 	size_t elementCount
 ) const {
+	// std::cout << "[DEBUG]: vector before main and pend\n" << printContainer(vector);
+
 	// Insert b1 and a1 in main
 	size_t endOfA1 = 2 * elementSize;
 	main.insert(main.end(), vector.begin(), vector.begin() + endOfA1);
@@ -200,9 +203,12 @@ void PmergeMe::fillMainAndPendVector(
 	if (leftoverStart < vector.size()) {
 		main.insert(main.end(), vector.begin() + leftoverStart, vector.end());
 	}
+	// std::cout << "[DEBUG]: main\n" << printContainer(main);
+	// std::cout << "[DEBUG]: pend\n" << printContainer(pend);
 }
 
 void PmergeMe::fordJohnsonSortVector(std::vector<int>& vector, size_t elementSize) {
+	// std::cout << "[DEBUG]: intial vector\n" << printContainer(vector);
 	size_t totalSize = vector.size();
 	size_t elementCount = totalSize / elementSize;
 
